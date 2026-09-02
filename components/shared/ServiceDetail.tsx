@@ -1,7 +1,8 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ShieldCheck, MessageCircle } from "lucide-react";
 import type { ServiceCategory } from "@/types";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { CONTACT } from "@/constants/data";
 
 export function ServiceDetail({ service }: { service: ServiceCategory }) {
   const Icon = service.icon;
@@ -26,7 +27,7 @@ export function ServiceDetail({ service }: { service: ServiceCategory }) {
           {/* Benefits + Process */}
           <div className="lg:col-span-2 space-y-10">
             <Reveal>
-              <h3 className="text-display text-lg font-medium text-ink">Benefits</h3>
+              <h3 className="text-display text-lg font-medium text-ink">Key Benefits</h3>
               <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {service.benefits.map((b) => (
                   <div key={b} className="flex items-start gap-2.5 text-sm text-ink-dim">
@@ -51,7 +52,7 @@ export function ServiceDetail({ service }: { service: ServiceCategory }) {
             </Reveal>
 
             <Reveal delay={0.12}>
-              <h3 className="text-display text-lg font-medium text-ink">Technology Used</h3>
+              <h3 className="text-display text-lg font-medium text-ink">Technology Stack</h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {service.technologies.map((t) => (
                   <span key={t} className="rounded-pill border border-border-strong bg-white/50 px-3.5 py-1.5 text-xs text-ink-dim">
@@ -62,7 +63,7 @@ export function ServiceDetail({ service }: { service: ServiceCategory }) {
             </Reveal>
 
             <Reveal delay={0.18}>
-              <h3 className="text-display text-lg font-medium text-ink">FAQ</h3>
+              <h3 className="text-display text-lg font-medium text-ink">Frequently Asked Questions</h3>
               <div className="mt-4 space-y-3">
                 {service.faqs.map((f) => (
                   <div key={f.question} className="glass-card p-5">
@@ -76,7 +77,7 @@ export function ServiceDetail({ service }: { service: ServiceCategory }) {
 
           {/* Pricing + CTA */}
           <div className="space-y-4">
-            <h3 className="text-display text-lg font-medium text-ink">Pricing</h3>
+            <h3 className="text-display text-lg font-medium text-ink">Transparent INR Pricing</h3>
             {service.pricing.map((tier, i) => (
               <Reveal key={tier.tier} delay={i * 0.06}>
                 <div className="glass-card p-5">
@@ -96,8 +97,19 @@ export function ServiceDetail({ service }: { service: ServiceCategory }) {
                 </div>
               </Reveal>
             ))}
-            <Button href="/contact" variant="primary" className="mt-2 w-full justify-center">
-              Get a Quote
+
+            <div className="rounded-xl border border-border-strong bg-white/40 p-4 text-xs text-ink-dim space-y-1.5">
+              <div className="flex items-center gap-1.5 font-medium text-ink">
+                <ShieldCheck className="h-4 w-4 text-blue" />
+                GST Invoices &amp; Milestone Billing
+              </div>
+              <p className="text-[11px] text-ink-faint">
+                Pay in easy milestones via UPI, NEFT, IMPS or Cards. Full GST input tax credit provided.
+              </p>
+            </div>
+
+            <Button href={CONTACT.whatsappHref} variant="primary" className="mt-2 w-full justify-center">
+              Request a Custom Quote
             </Button>
           </div>
         </div>

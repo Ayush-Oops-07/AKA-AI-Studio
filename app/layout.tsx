@@ -21,21 +21,24 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AKA AI Studio — Building Intelligent Digital Products",
+  title: "AKA AI Studio — Premier AI Engineering & Software Design Studio India",
   description:
-    "AKA AI Studio is an AI engineering and product design studio founded by Ayush, Komal, and Anushka — building premium web, mobile, and AI-native products.",
+    "AKA AI Studio is a premier AI engineering and software design studio founded by Ayush, Komal, and Anushka — building high-performance web platforms, mobile apps, and AI systems for ambitious businesses in Bihar, India, and globally.",
   keywords: [
-    "AI engineering company",
-    "software development studio",
+    "AI engineering studio India",
+    "web development Bihar",
+    "Next.js developers India",
+    "software development studio Thawe Gopalganj",
     "AI agents",
-    "RAG",
-    "LLM development",
-    "cloud and DevOps",
+    "RAG systems",
+    "CBSE school website development",
+    "retail website development India",
+    "cloud and DevOps India",
   ],
   openGraph: {
     title: "AKA AI Studio — Building Intelligent Digital Products",
     description:
-      "AI engineering, software development, and cloud partner for teams building the next generation of intelligent products.",
+      "AI engineering, web development, and cloud partner for businesses building the next generation of digital products in India.",
     type: "website",
   },
   robots: { index: true, follow: true },
