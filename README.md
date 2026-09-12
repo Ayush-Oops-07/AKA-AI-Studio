@@ -1,6 +1,6 @@
 # AKA AI Studio — Company Website
 
-The official marketing website for **AKA AI Studio**, founded by Ayush, Komal & Anushka. Built with Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4, and Framer Motion.
+The official marketing website for **AKA AI Studio**, founded by Ayush, Adarsh & Kumari Abhilasha. Built with Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4, and Framer Motion.
 
 ## Stack
 

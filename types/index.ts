@@ -8,12 +8,14 @@ export interface NavLink {
 export interface Founder {
   id: string;
   name: string;
+  fullName?: string;
   role: string;
   initials: string;
   skills: string[];
   bio: string;
   gradient: string;
   image?: string;
+  alt?: string;
 }
 
 export interface ServiceCategory {

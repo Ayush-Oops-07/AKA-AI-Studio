@@ -15,7 +15,7 @@ export default function BlogPage() {
       <PageHero
         eyebrow="Blog"
         title="Notes from the studio."
-        description="Thoughts on AI engineering, product design, and building software the right way — from Ayush, Komal, and Anushka."
+        description="Thoughts on AI engineering, product design, and building software the right way — from Ayush, Adarsh, and Kumari Abhilasha."
       />
 
       <section className="pb-24">

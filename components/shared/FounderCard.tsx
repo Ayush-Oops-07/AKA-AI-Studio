@@ -9,7 +9,13 @@ export function FounderCard({ founder, delay = 0 }: { founder: Founder; delay?: 
       <GlassCard className="h-full">
         {founder.image ? (
           <div className="relative h-20 w-20 overflow-hidden rounded-full shadow-lg ring-2 ring-white">
-            <Image src={founder.image} alt={founder.name} fill className="object-cover" sizes="80px" />
+            <Image
+              src={founder.image}
+              alt={founder.alt || `Portrait of ${founder.fullName || founder.name}, ${founder.role} of AKA AI Studio`}
+              fill
+              className="object-cover"
+              sizes="80px"
+            />
           </div>
         ) : (
           <div
@@ -21,16 +27,18 @@ export function FounderCard({ founder, delay = 0 }: { founder: Founder; delay?: 
         <h3 className="text-display mt-5 text-xl font-medium text-ink">{founder.name}</h3>
         <p className="mt-1 text-sm font-medium text-ink-dim">{founder.role}</p>
         <p className="mt-4 text-sm leading-relaxed text-ink-dim">{founder.bio}</p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {founder.skills.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-pill border border-border-strong bg-white/50 px-3 py-1 text-xs text-ink-dim"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
+        {founder.skills && founder.skills.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {founder.skills.map((skill) => (
+              <span
+                key={skill}
+                className="rounded-pill border border-border-strong bg-white/50 px-3 py-1 text-xs text-ink-dim"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        )}
       </GlassCard>
     </Reveal>
   );

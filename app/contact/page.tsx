@@ -18,7 +18,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Get In Touch"
         title="Let's build something extraordinary together."
-        description="Message us on WhatsApp for the fastest reply, or call/email Ayush, Komal & Anushka directly."
+        description="Message us on WhatsApp for the fastest reply, or call/email Ayush, Adarsh & K. Abhilasha directly."
       />
 
       <section className="pb-16">

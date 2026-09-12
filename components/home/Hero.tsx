@@ -19,7 +19,7 @@ export function Hero() {
             className="glass-strong inline-flex items-center gap-2 rounded-pill px-4 py-1.5 text-xs font-medium text-ink-dim"
           >
             <Sparkles className="h-3.5 w-3.5 text-violet" />
-            Founded by Ayush, Komal &amp; Anushka
+            Founded by Ayush, Adarsh &amp; K. Abhilasha
           </motion.div>
 
           <motion.h1

@@ -53,7 +53,7 @@ export const SITE = {
   name: "AKA AI Studio",
   tagline: "Three Founders. One Obsession: Intelligent Software.",
   description:
-    "AKA AI Studio is a premier AI engineering and software design studio founded by Ayush, Komal, and Anushka — building high-performance web platforms, mobile apps, and AI systems for ambitious businesses across Bihar, India, and globally.",
+    "AKA AI Studio is a premier AI engineering and software design studio founded by Ayush, Adarsh, and Kumari Abhilasha — building high-performance web platforms, mobile apps, and AI systems for ambitious businesses across Bihar, India, and globally.",
 };
 
 /**
@@ -125,37 +125,43 @@ export const FOUNDERS: Founder[] = [
   {
     id: "ayush",
     name: "Ayush",
-    role: "Co-Founder & AI Engineering Lead",
+    fullName: "Ayush Kumar Sharma",
+    role: "Founder",
     initials: "A",
     skills: ["AI Agents", "RAG Systems", "Python", "Cloud Architecture"],
     bio: "Ayush leads AI and backend architecture — designing the agentic systems and infrastructure that power every AKA product under the hood.",
     gradient: "from-blue to-cyan",
-    image: "/images/team/ayush.jpg",
+    image: "/images/team/ayush-kumar-sharma.jpg",
+    alt: "Portrait of Ayush Kumar Sharma, Founder of AKA AI Studio",
   },
   {
-    id: "komal",
-    name: "Komal",
-    role: "Co-Founder & Engineering Lead",
-    initials: "K",
-    skills: ["Next.js", "Mobile Apps", "DevOps", "System Design"],
-    bio: "Komal owns full-stack and mobile engineering, turning ambitious product ideas into fast, reliable web and app experiences shipped on tight timelines.",
-    gradient: "from-violet to-blue",
-    image: "/images/team/komal.jpg",
-  },
-  {
-    id: "anushka",
-    name: "Anushka",
-    role: "Co-Founder & Design & Product Lead",
+    id: "adarsh",
+    name: "Adarsh",
+    fullName: "Adarsh Pandey",
+    role: "Co-founder",
     initials: "A",
-    skills: ["Product Design", "UX Research", "Brand", "Client Strategy"],
-    bio: "Anushka shapes product direction and design — making sure every interface AKA ships feels as considered and premium as the engineering behind it.",
+    skills: ["Full-Stack Web", "Next.js", "System Design", "Cloud Systems"],
+    bio: "Adarsh oversees full-stack and scalable systems engineering, turning complex technical blueprints into fast, resilient, and enterprise-grade software products.",
+    gradient: "from-violet to-blue",
+    image: "/images/team/adarsh-pandey.jpg",
+    alt: "Portrait of Adarsh Pandey, Co-founder of AKA AI Studio",
+  },
+  {
+    id: "abhilasha",
+    name: "K. Abhilasha",
+    fullName: "Kumari Abhilasha",
+    role: "Co-founder",
+    initials: "K",
+    skills: ["UI/UX Design", "Product Strategy", "Frontend Craft", "User Research"],
+    bio: "Abhilasha shapes product design and user experience — ensuring every digital interface and AI solution AKA ships is elegant, intuitive, and thoughtfully crafted.",
     gradient: "from-cyan to-violet",
-    image: "/images/team/anushka.jpg",
+    image: "/images/team/kumari-abhilasha.png",
+    alt: "Portrait of Kumari Abhilasha, Co-founder of AKA AI Studio",
   },
 ];
 
 export const TIMELINE: TimelineEntry[] = [
-  { year: "2022", title: "Three friends, one idea", description: "Ayush, Komal, and Anushka start building software together as students in India — the name AKA is born from their initials." },
+  { year: "2022", title: "Three friends, one idea", description: "Ayush, Adarsh, and Kumari Abhilasha start building software together as students in India — the name AKA is born from their initials." },
   { year: "2023", title: "First client projects", description: "AKA takes on its first web and app builds for businesses across Bihar, quickly earning a reputation for senior-level craft and reliability." },
   { year: "2024", title: "Going AI-native", description: "The studio expands focus to AI engineering — agents, RAG systems, and LLM infrastructure tailored for Indian & global enterprises." },
   { year: "2025", title: "AKA AI Studio launches", description: "The studio formalizes into AKA AI Studio, a full-service AI engineering and product design partner." },
@@ -166,7 +172,7 @@ export const CORE_VALUES: CoreValue[] = [
   { title: "Craft over speed for its own sake", description: "We move fast, but never at the cost of quality. Every line of code and pixel is deliberate.", icon: Target },
   { title: "Radical transparency", description: "Fixed scope, clear INR pricing, weekly demos. No black boxes, no surprise invoices, full GST compliance.", icon: Handshake },
   { title: "AI-native thinking", description: "We don't bolt AI onto software — we design systems where intelligence is core architecture.", icon: Lightbulb },
-  { title: "Founder-level ownership", description: "Every project is touched directly by Ayush, Komal, or Anushka — never handed off to an agency intermediary.", icon: Rocket },
+  { title: "Founder-level ownership", description: "Every project is touched directly by Ayush, Adarsh, or Kumari Abhilasha — never handed off to an agency intermediary.", icon: Rocket },
 ];
 
 export const MISSION = "To help ambitious businesses build AI-powered digital products that feel as premium as they perform — with transparent Indian pricing and zero agency bloat.";
@@ -598,7 +604,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
 ];
 
 export const FAQS: FaqItem[] = [
-  { id: "f1", question: "How is AKA AI Studio different from traditional agencies?", answer: "We are three senior founders, not sales middlemen or junior outsource teams. Every project is planned, designed, and coded directly by Ayush, Komal, or Anushka with fixed INR pricing and zero hidden fees." },
+  { id: "f1", question: "How is AKA AI Studio different from traditional agencies?", answer: "We are three senior founders, not sales middlemen or junior outsource teams. Every project is planned, designed, and coded directly by Ayush, Adarsh, or Kumari Abhilasha with fixed INR pricing and zero hidden fees." },
   { id: "f2", question: "What are your payment terms and do you provide GST invoices?", answer: "Yes, 100% GST-compliant invoices are provided for business tax input credit. Payments are milestone-based (e.g. 40% advance, 30% midway demo, 30% on launch) payable via UPI, Net Banking (NEFT/RTGS/IMPS), or Cards." },
   { id: "f3", question: "Can we communicate in Hindi or English?", answer: "Yes, we comfortably communicate in both Hindi and English. We provide regular updates directly on WhatsApp, phone calls, or Google Meet as per your preference." },
   { id: "f4", question: "Do you help with domain purchase, DNS, and hosting setup?", answer: "Yes, end-to-end! We set up your custom domain (.in, .com, .info, .org), SSL certificate, high-speed CDN, corporate emails, and search engine indexing." },
