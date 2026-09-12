@@ -60,7 +60,8 @@ export const SITE = {
  * Single source of truth for real contact details.
  * Update these here and every button/link across the site updates with it.
  */
-const WHATSAPP_NUMBER = "918235308885"; // country code + number, no +/spaces/dashes
+const WHATSAPP_NUMBER = "918235308885"; // Ayush (Primary)
+const ADARSH_WHATSAPP_NUMBER = "919369791938"; // Adarsh (Co-founder)
 
 export const CONTACT = {
   phoneDisplay: "+91 82353 08885",
@@ -68,7 +69,13 @@ export const CONTACT = {
   email: "starksystem07@gmail.com",
   emailHref: "mailto:starksystem07@gmail.com",
   whatsappNumber: WHATSAPP_NUMBER,
-  locationDisplay: "Thawe, Gopalganj, Bihar & Bengaluru, India",
+  adarshPhoneDisplay: "+91 93697 91938",
+  adarshPhoneHref: "tel:+919369791938",
+  adarshWhatsappNumber: ADARSH_WHATSAPP_NUMBER,
+  adarshWhatsappHref: `https://wa.me/${ADARSH_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    "Hi Adarsh! I'd like to discuss a project with AKA AI Studio."
+  )}`,
+  locationDisplay: "Dehradun, Uttarakhand, India",
   supportHours: "Mon – Sat: 9:00 AM – 8:00 PM IST",
   whatsappHref: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     "Hi AKA AI Studio! I'd like to discuss building a project for my business."
@@ -133,6 +140,8 @@ export const FOUNDERS: Founder[] = [
     gradient: "from-blue to-cyan",
     image: "/images/team/ayush-kumar-sharma.jpg",
     alt: "Portrait of Ayush Kumar Sharma, Founder of AKA AI Studio",
+    portfolioUrl: "https://ayushops.in",
+    portfolioLabel: "ayushops.in",
   },
   {
     id: "adarsh",
@@ -145,6 +154,8 @@ export const FOUNDERS: Founder[] = [
     gradient: "from-violet to-blue",
     image: "/images/team/adarsh-pandey.jpg",
     alt: "Portrait of Adarsh Pandey, Co-founder of AKA AI Studio",
+    portfolioUrl: "https://adarsh-pandey.in",
+    portfolioLabel: "adarsh-pandey.in",
   },
   {
     id: "abhilasha",

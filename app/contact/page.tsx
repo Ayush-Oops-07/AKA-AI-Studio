@@ -9,7 +9,7 @@ import { FAQS, CONTACT } from "@/constants/data";
 
 export const metadata: Metadata = {
   title: "Contact Us — AKA AI Studio",
-  description: "Get in touch with AKA AI Studio directly on WhatsApp, phone, or email. Based in Thawe, Bihar & Bengaluru, India.",
+  description: "Get in touch with AKA AI Studio directly on WhatsApp, phone, or email. Based in Dehradun, Uttarakhand, India.",
 };
 
 export default function ContactPage() {
@@ -38,14 +38,38 @@ export default function ContactPage() {
                   <MessageCircle className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink">WhatsApp (Fastest Response)</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-semibold text-ink">WhatsApp (Primary)</p>
+                    <span className="rounded-pill bg-blue/10 px-2 py-0.5 text-[10px] font-medium text-blue">Ayush</span>
+                  </div>
                   <p className="mt-1 text-sm text-ink-dim">{CONTACT.phoneDisplay}</p>
                   <p className="mt-0.5 text-xs text-emerald-600 font-medium">Replies within minutes</p>
                 </div>
               </a>
             </Reveal>
 
-            <Reveal delay={0.06}>
+            <Reveal delay={0.05}>
+              <a
+                href={CONTACT.adarshWhatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card flex items-start gap-4 p-6 transition-all hover:bg-white/80 hover:border-blue/30"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600">
+                  <MessageCircle className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-semibold text-ink">WhatsApp</p>
+                    <span className="rounded-pill bg-violet/10 px-2 py-0.5 text-[10px] font-medium text-violet">Adarsh</span>
+                  </div>
+                  <p className="mt-1 text-sm text-ink-dim">{CONTACT.adarshPhoneDisplay}</p>
+                  <p className="mt-0.5 text-xs text-ink-faint">Direct line to co-founder</p>
+                </div>
+              </a>
+            </Reveal>
+
+            <Reveal delay={0.1}>
               <a
                 href={CONTACT.phoneHref}
                 className="glass-card flex items-start gap-4 p-6 transition-all hover:bg-white/80 hover:border-blue/30"
@@ -56,7 +80,7 @@ export default function ContactPage() {
                 <div>
                   <p className="text-sm font-semibold text-ink">Direct Call</p>
                   <p className="mt-1 text-sm text-ink-dim">{CONTACT.phoneDisplay}</p>
-                  <p className="mt-0.5 text-xs text-ink-faint">Direct line to founders</p>
+                  <p className="mt-0.5 text-xs text-ink-faint">Direct line to studio</p>
                 </div>
               </a>
             </Reveal>

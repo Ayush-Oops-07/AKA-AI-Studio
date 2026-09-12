@@ -16,6 +16,8 @@ export interface Founder {
   gradient: string;
   image?: string;
   alt?: string;
+  portfolioUrl?: string;
+  portfolioLabel?: string;
 }
 
 export interface ServiceCategory {
