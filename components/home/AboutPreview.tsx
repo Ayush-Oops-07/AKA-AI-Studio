@@ -12,7 +12,7 @@ export function AboutPreview() {
             eyebrow="Who We Are"
             title={
               <>
-                AKA means <span className="gradient-text">Ayush, Adarsh &amp; K. Abhilasha</span>.
+                AKA means <span className="gradient-text">Ayush, K. Abhilasha &amp; Adarsh</span>.
               </>
             }
             description="Three close friends who became co-founders — building AI-powered digital products with the care of a boutique studio and the rigor of a senior engineering team."
@@ -36,7 +36,7 @@ export function AboutPreview() {
           <div className="glass-card relative aspect-[4/3] overflow-hidden p-0">
             <Image
               src="/images/team/group-photo.png"
-              alt="Ayush, Adarsh & K. Abhilasha — founders of AKA AI Studio"
+              alt="Ayush, K. Abhilasha & Adarsh — founders of AKA AI Studio"
               fill
               sizes="(max-width: 1024px) 100vw, 560px"
               className="object-cover"

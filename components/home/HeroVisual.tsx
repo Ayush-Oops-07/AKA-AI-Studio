@@ -91,14 +91,14 @@ export function HeroVisual() {
         <div className="absolute inset-16 overflow-hidden rounded-full shadow-glossy sm:inset-20 lg:inset-24">
           <Image
             src="/images/team/group-photo.png"
-            alt="Ayush, Adarsh & K. Abhilasha — the AKA AI Studio founders"
+            alt="K. Abhilasha, Ayush & Adarsh — the AKA AI Studio founders"
             fill
             sizes="(max-width: 640px) 260px, (max-width: 1024px) 340px, 400px"
             className="object-cover"
             priority
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/60 to-transparent py-3 text-center">
-            <span className="text-xs font-medium tracking-wide text-white">Ayush &middot; Adarsh &middot; K. Abhilasha</span>
+            <span className="text-xs font-medium tracking-wide text-white">K. Abhilasha &middot; Ayush &middot; Adarsh</span>
           </div>
         </div>
 

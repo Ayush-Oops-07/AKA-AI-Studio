@@ -23,7 +23,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "AKA AI Studio — Premier AI Engineering & Software Design Studio India",
   description:
-    "AKA AI Studio is a premier AI engineering and software design studio founded by Ayush, Adarsh, and Kumari Abhilasha — building high-performance web platforms, mobile apps, and AI systems for ambitious businesses in Bihar, India, and globally.",
+    "AKA AI Studio is a premier AI engineering and software design studio founded by Ayush, Kumari Abhilasha, and Adarsh — building high-performance web platforms, mobile apps, and AI systems for ambitious businesses in Bihar, India, and globally.",
   keywords: [
     "AI engineering studio India",
     "web development Bihar",

@@ -235,7 +235,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       <CTASection
         title="Ready to build a website for your business?"
-        description="Connect directly with Ayush, Adarsh & K. Abhilasha on WhatsApp — we'll share a customized quote and prototype plan within 24 hours."
+        description="Connect directly with Ayush, K. Abhilasha & Adarsh on WhatsApp — we'll share a customized quote and prototype plan within 24 hours."
       />
     </>
   );

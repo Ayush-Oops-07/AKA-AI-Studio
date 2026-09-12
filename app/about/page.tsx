@@ -8,7 +8,7 @@ import { FOUNDERS, TIMELINE, CORE_VALUES, MISSION, VISION } from "@/constants/da
 
 export const metadata: Metadata = {
   title: "About — AKA AI Studio",
-  description: "Meet Ayush, Adarsh, and Kumari Abhilasha — the three founders behind AKA AI Studio, and the story, mission, and values that drive the studio.",
+  description: "Meet Ayush, Kumari Abhilasha, and Adarsh — the three founders behind AKA AI Studio, and the story, mission, and values that drive the studio.",
 };
 
 export default function AboutPage() {
@@ -17,7 +17,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Our Story"
         title="Three friends. One name. A studio built on trust."
-        description="AKA stands for Ayush, Adarsh, and Kumari Abhilasha — three close friends who turned late-night side projects into a full-service AI engineering and design studio."
+        description="AKA stands for Ayush, Kumari Abhilasha, and Adarsh — three close friends who turned late-night side projects into a full-service AI engineering and design studio."
       />
 
       <section className="section-pad pt-0">

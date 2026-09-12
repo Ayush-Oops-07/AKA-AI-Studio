@@ -16,7 +16,7 @@ const SEED_REVIEWS: Review[] = [
     business: "Founder, Mohit Enterprise Group (Thawe)",
     rating: 5,
     message:
-      "AKA AI Studio built our official group website mohitmobile.in. Ayush, Adarsh, and Kumari Abhilasha delivered a top-class, fast portal on time. Our customers can now easily explore our smartphone showrooms and reach us directly on WhatsApp.",
+      "AKA AI Studio built our official group website mohitmobile.in. Ayush, Kumari Abhilasha, and Adarsh delivered a top-class, fast portal on time. Our customers can now easily explore our smartphone showrooms and reach us directly on WhatsApp.",
     created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 14).toISOString(),
   },
   {
