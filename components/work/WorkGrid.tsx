@@ -7,7 +7,7 @@ import { ArrowUpRight, MapPin, ExternalLink, Globe, Sparkles, CheckCircle2 } fro
 import { Reveal } from "@/components/ui/Reveal";
 import { CASE_STUDIES } from "@/constants/data";
 
-const CATEGORIES = ["All Projects", "Education", "Hospitality", "Retail & Electronics", "Building Materials"];
+const CATEGORIES = ["All Projects", "Education", "Hospitality", "Retail & Electronics", "Building Materials", "Events"];
 
 export function WorkGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All Projects");
@@ -18,6 +18,7 @@ export function WorkGrid() {
     if (selectedCategory === "Hospitality") return cs.industry.toLowerCase().includes("hospitality");
     if (selectedCategory === "Retail & Electronics") return cs.industry.toLowerCase().includes("retail");
     if (selectedCategory === "Building Materials") return cs.industry.toLowerCase().includes("building");
+    if (selectedCategory === "Events") return cs.industry.toLowerCase().includes("events");
     return true;
   });
 
@@ -51,6 +52,7 @@ export function WorkGrid() {
             <p className="text-sm font-semibold text-ink">100% Live Sites</p>
           </div>
         </div>
+
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-violet/10 text-violet">
             <Sparkles className="h-4 w-4" />
@@ -60,6 +62,7 @@ export function WorkGrid() {
             <p className="text-sm font-semibold text-ink">Sub-second 4G</p>
           </div>
         </div>
+
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan/10 text-cyan">
             <CheckCircle2 className="h-4 w-4" />
@@ -69,6 +72,7 @@ export function WorkGrid() {
             <p className="text-sm font-semibold text-ink">SSL &amp; DNS Setup</p>
           </div>
         </div>
+
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue/10 text-blue">
             <MapPin className="h-4 w-4" />
@@ -85,6 +89,7 @@ export function WorkGrid() {
         {filteredStudies.map((cs, i) => (
           <Reveal key={cs.id} delay={i * 0.08}>
             <article className="glass-card group flex h-full flex-col overflow-hidden !p-0 transition-all duration-300 hover:border-blue/30">
+              
               {/* Image Preview Container */}
               <div className="relative aspect-[16/9.5] w-full overflow-hidden bg-surface-2">
                 {cs.image ? (
@@ -100,7 +105,9 @@ export function WorkGrid() {
                     <span className="rounded-pill glass px-4 py-1.5 text-xs font-medium tracking-wide text-ink-dim">
                       Live Project
                     </span>
-                    <span className="text-display text-lg font-medium text-ink/60">{cs.client}</span>
+                    <span className="text-display text-lg font-medium text-ink/60">
+                      {cs.client}
+                    </span>
                   </div>
                 )}
 
@@ -121,6 +128,7 @@ export function WorkGrid() {
                   <span className="rounded-pill border border-border-strong bg-white/60 px-3 py-1 text-xs font-medium text-ink-dim">
                     {cs.industry}
                   </span>
+
                   {cs.location && (
                     <span className="inline-flex items-center gap-1 text-xs text-ink-faint">
                       <MapPin className="h-3 w-3 text-blue" /> {cs.location}
@@ -131,8 +139,14 @@ export function WorkGrid() {
                 <h3 className="text-display mt-3.5 text-xl font-medium text-ink transition-colors group-hover:text-blue">
                   {cs.client}
                 </h3>
-                <p className="mt-1 text-sm font-medium text-ink-faint">{cs.title}</p>
-                <p className="mt-3 text-sm leading-relaxed text-ink-dim flex-1">{cs.summary}</p>
+
+                <p className="mt-1 text-sm font-medium text-ink-faint">
+                  {cs.title}
+                </p>
+
+                <p className="mt-3 text-sm leading-relaxed text-ink-dim flex-1">
+                  {cs.summary}
+                </p>
 
                 {/* Tags */}
                 <div className="mt-5 flex flex-wrap gap-1.5">
@@ -159,6 +173,7 @@ export function WorkGrid() {
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   ) : null}
+
                   <Link
                     href={`/work/${cs.id}`}
                     className="inline-flex items-center gap-1 text-xs font-medium text-ink-dim transition-colors hover:text-ink ml-auto"
