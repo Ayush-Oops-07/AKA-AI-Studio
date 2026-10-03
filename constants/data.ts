@@ -606,30 +606,57 @@ export const CASE_STUDIES: CaseStudy[] = [
     image: "/images/work/sandeep-traders.jpg",
     liveUrl: "https://mandeepkumarkushwaha-cmyk.github.io/sandeep-traders/",
   },
+    {
+    id: "navratri-vibes-dandiya-2026",
+    client: "Navratri Vibes with Dandiya Beats 2026",
+    industry: "Events",
+    location: "Bihar, India",
+    title: "A vibrant digital experience for Navratri Dandiya celebrations",
+    summary:
+      "A modern event website created for Navratri Vibes with Dandiya Beats 2026, featuring event information, ticketing details, and a festive digital experience.",
+    about:
+      "Navratri Vibes with Dandiya Beats 2026 is a modern event platform designed to promote a festive Dandiya celebration and provide visitors with essential event and ticketing information through a visually engaging experience.",
+    metrics: [
+      { label: "Live site", value: "Vercel Deployment" },
+      { label: "Focus", value: "Event & Ticketing" },
+      { label: "Built with", value: "Modern Web Stack" },
+    ],
+    tags: [
+      "Event Website",
+      "Ticketing",
+      "Responsive Design",
+      "Modern UI",
+    ],
+    image: "/images/work/Navratri Vibes with Dandiya Beats 2026.jpg",
+    liveUrl:
+      "https://navratri-vibes-with-dandiya-beats-e.vercel.app/",
+  },
+
   {
-  id: "navratri-vibes-dandiya-2026",
-  client: "Navratri Vibes with Dandiya Beats 2026",
-  title: "Event Website & Digital Experience",
-  industry: "Events",
-  location: "Bihar, India",
-  image: "/images/work/Navratri Vibes with Dandiya Beats 2026.jpg",
-  liveUrl: "https://navratri-vibes-with-dandiya-beats-e.vercel.app/",
-  summary:
-    "A vibrant event website created for Navratri Vibes with Dandiya Beats 2026, featuring event details, ticketing information, and a modern festive digital experience.",
-  tags: ["Event Website", "Ticketing", "Responsive Design", "Modern UI"],
-},
-{
-  id: "national-model-school",
-  client: "National Model School",
-  title: "School Website & Digital Presence",
-  industry: "Education",
-  location: "Bihar, India",
-  image: "/images/work/national-model-school.jpg",
-  liveUrl: "https://national-model-school.vercel.app/",
-  summary:
-    "A professional school website designed to present the institution, academics, facilities, activities, and important information through a modern responsive interface.",
-  tags: ["Education", "School Website", "Responsive Design", "Modern UI"],
-},
+    id: "national-model-school",
+    client: "National Model School",
+    industry: "Education",
+    location: "Bihar, India",
+    title: "A modern digital presence for National Model School",
+    summary:
+      "A professional school website designed to showcase the institution, academics, facilities, activities, and important information through a modern responsive interface.",
+    about:
+      "National Model School's digital presence provides students, parents, and visitors with an accessible platform to explore the school's information, academic environment, facilities, activities, and other important details.",
+    metrics: [
+      { label: "Live site", value: "Vercel Deployment" },
+      { label: "Focus", value: "School Website" },
+      { label: "Built with", value: "Modern Web Stack" },
+    ],
+    tags: [
+      "Education",
+      "School Website",
+      "Responsive Design",
+      "Modern UI",
+    ],
+    image: "/images/work/national-model-school.jpg",
+    liveUrl:
+      "https://national-model-school.vercel.app/",
+  },
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [
