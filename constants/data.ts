@@ -606,6 +606,30 @@ export const CASE_STUDIES: CaseStudy[] = [
     image: "/images/work/sandeep-traders.jpg",
     liveUrl: "https://mandeepkumarkushwaha-cmyk.github.io/sandeep-traders/",
   },
+  {
+  id: "navratri-vibes-dandiya-2026",
+  client: "Navratri Vibes with Dandiya Beats 2026",
+  title: "Event Website & Digital Experience",
+  industry: "Events",
+  location: "Bihar, India",
+  image: "/images/work/Navratri Vibes with Dandiya Beats 2026.jpg",
+  liveUrl: "https://navratri-vibes-with-dandiya-beats-e.vercel.app/",
+  summary:
+    "A vibrant event website created for Navratri Vibes with Dandiya Beats 2026, featuring event details, ticketing information, and a modern festive digital experience.",
+  tags: ["Event Website", "Ticketing", "Responsive Design", "Modern UI"],
+},
+{
+  id: "national-model-school",
+  client: "National Model School",
+  title: "School Website & Digital Presence",
+  industry: "Education",
+  location: "Bihar, India",
+  image: "/images/work/national-model-school.jpg",
+  liveUrl: "https://national-model-school.vercel.app/",
+  summary:
+    "A professional school website designed to present the institution, academics, facilities, activities, and important information through a modern responsive interface.",
+  tags: ["Education", "School Website", "Responsive Design", "Modern UI"],
+},
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [
