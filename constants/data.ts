@@ -629,7 +629,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     image: "/images/work/Navratri Vibes with Dandiya Beats 2026.jpg",
     liveUrl:
-      "https://navratri-vibes-with-dandiya-beats-e.vercel.app/",
+      "https://www.elitesgroup.org/",
   },
 
   {
