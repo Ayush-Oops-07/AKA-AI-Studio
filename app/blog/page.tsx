@@ -2,35 +2,65 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/shared/CTASection";
-import { BLOG_POSTS } from "@/constants/data";
 
 export const metadata: Metadata = {
-  title: "Blog — AKA AI Studio",
-  description: "Notes on AI engineering, product design, and building software studios — from the AKA AI Studio team.",
+  title: "Notes from the Studio — AKA AI Studio",
+  description:
+    "Honest thoughts on building websites, WhatsApp automation, and software for local businesses in Bihar and UP.",
 };
+
+const POSTS = [
+  {
+    id: "4g-speed-for-local-business",
+    category: "Performance",
+    title: "Why 4G loading speed matters more than heavy animations for local shops",
+    excerpt:
+      "Most customers in Gopalganj and Varanasi visit your website on 4G phones. If your page takes 5 seconds to load, they will close the tab and call someone else.",
+    date: "February 2026",
+    readTime: "3 min read",
+  },
+  {
+    id: "whatsapp-lead-generation",
+    category: "Sales & Inquiries",
+    title: "Why a WhatsApp button generates 3x more customer inquiries than an email form",
+    excerpt:
+      "Small business customers rarely check email. A pre-filled WhatsApp link lets them ask questions instantly right from their phone.",
+    date: "January 2026",
+    readTime: "4 min read",
+  },
+  {
+    id: "student-founders-journey",
+    category: "Studio Notes",
+    title: "Three friends, three students: building real client websites from college",
+    excerpt:
+      "How Adarsh, Ayush, and Kumari Abhilasha started building software for schools, hotels, and retail stores while completing our MCA studies.",
+    date: "December 2025",
+    readTime: "5 min read",
+  },
+];
 
 export default function BlogPage() {
   return (
     <>
       <PageHero
-        eyebrow="Blog"
+        eyebrow="Studio Notes"
         title="Notes from the studio."
-        description="Thoughts on AI engineering, product design, and building software the right way — from Ayush, Kumari Abhilasha, and Adarsh."
+        description="Practical ideas about websites, WhatsApp automation, and honest software for local businesses."
       />
 
-      <section className="pb-24">
-        <div className="container-shell grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {BLOG_POSTS.map((post, i) => (
-            <Reveal key={post.id} delay={i * 0.05}>
-              <article className="glass-card group flex h-full flex-col p-7">
-                <div
-                  className="mb-5 h-36 rounded-2xl bg-gradient-to-br opacity-90 transition-transform duration-500 group-hover:scale-[1.02]"
-                  style={{ backgroundImage: "linear-gradient(135deg, rgba(67,97,238,0.18), rgba(139,92,246,0.18), rgba(34,201,224,0.18))" }}
-                />
-                <span className="text-mono-eyebrow gradient-text">{post.category}</span>
-                <h3 className="text-display mt-2 text-lg font-medium leading-snug text-ink">{post.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-dim">{post.excerpt}</p>
-                <div className="mt-5 flex items-center justify-between text-xs text-ink-faint">
+      <section className="section-spacing" style={{ backgroundColor: "#FBF6EE" }}>
+        <div className="container-main grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {POSTS.map((post, i) => (
+            <Reveal key={post.id} delay={i * 0.06}>
+              <article className="card flex h-full flex-col p-6">
+                <span className="text-eyebrow text-xs">{post.category}</span>
+                <h2 className="text-heading mt-3 text-lg text-[#1F2A44]">
+                  {post.title}
+                </h2>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-[#4A5370]">
+                  {post.excerpt}
+                </p>
+                <div className="mt-6 flex items-center justify-between border-t border-[#E2DDD5] pt-3 text-xs text-[#4A5370]">
                   <span>{post.date}</span>
                   <span>{post.readTime}</span>
                 </div>
@@ -40,7 +70,10 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <CTASection title="Have a topic you'd like us to cover?" description="Reach out and we'll consider it for a future post." />
+      <CTASection
+        title="Have a question or project to discuss?"
+        description="Message us on WhatsApp. We are happy to chat about your website or app idea."
+      />
     </>
   );
 }

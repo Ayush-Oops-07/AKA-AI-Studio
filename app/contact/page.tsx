@@ -1,115 +1,165 @@
 import type { Metadata } from "next";
-import { Mail, Phone, MessageCircle, Clock, MapPin, ShieldCheck, CreditCard } from "lucide-react";
-import { PageHero } from "@/components/shared/PageHero";
-import { ContactForm } from "@/components/shared/ContactForm";
+import { Mail, Phone, MessageCircle, MapPin, Clock } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { FAQS, CONTACT } from "@/constants/data";
+import { ContactForm } from "@/components/shared/ContactForm";
+import { PAGE_META, FAQS, CONTACT } from "@/data/content";
 
 export const metadata: Metadata = {
-  title: "Contact Us — AKA AI Studio",
-  description: "Get in touch with AKA AI Studio directly on WhatsApp, phone, or email. Based in Dehradun, Uttarakhand, India.",
+  title: PAGE_META.contact.title,
+  description: PAGE_META.contact.description,
 };
 
 export default function ContactPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Get In Touch"
-        title="Let's build something extraordinary together."
-        description="Message us on WhatsApp for the fastest reply, or call/email Ayush, K. Abhilasha & Adarsh directly."
-      />
+      {/* Page hero */}
+      <section
+        className="pb-12 pt-32 lg:pt-40"
+        style={{ backgroundColor: "#FBF6EE" }}
+      >
+        <div className="container-main max-w-3xl">
+          <Reveal>
+            <span className="text-eyebrow">Get In Touch</span>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <h1 className="text-heading mt-4 text-3xl leading-[1.15] text-[#1F2A44] sm:text-4xl lg:text-5xl">
+              Let us talk about what you need.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="mt-5 text-base leading-relaxed text-[#4A5370] lg:text-lg">
+              Message us on WhatsApp for the fastest reply, or use the form
+              below. You can also call or email us directly.
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
-      <section className="pb-16">
-        <div className="container-shell grid grid-cols-1 gap-8 lg:grid-cols-5">
+      {/* Contact form + sidebar */}
+      <section className="pb-16" style={{ backgroundColor: "#FBF6EE" }}>
+        <div className="container-main grid grid-cols-1 gap-8 lg:grid-cols-5">
           <div className="lg:col-span-3">
             <ContactForm />
           </div>
+
           <div className="space-y-4 lg:col-span-2">
+            {/* WhatsApp — Ayush */}
             <Reveal>
               <a
                 href={CONTACT.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card flex items-start gap-4 p-6 transition-all hover:bg-white/80 hover:border-blue/30"
+                className="card flex items-start gap-4 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#25D366] hover:shadow-sm"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] bg-[#25D366]/10 text-[#25D366]">
                   <MessageCircle className="h-5 w-5" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-semibold text-ink">WhatsApp (Primary)</p>
-                    <span className="rounded-pill bg-blue/10 px-2 py-0.5 text-[10px] font-medium text-blue">Ayush</span>
+                    <p className="text-sm font-semibold text-[#1F2A44]">
+                      WhatsApp (Primary)
+                    </p>
+                    <span className="rounded-[6px] bg-[#B84B23]/15 px-2 py-0.5 text-[10px] font-semibold text-[#8B3512]">
+                      Ayush
+                    </span>
                   </div>
-                  <p className="mt-1 text-sm text-ink-dim">{CONTACT.phoneDisplay}</p>
-                  <p className="mt-0.5 text-xs text-emerald-600 font-medium">Replies within minutes</p>
+                  <p className="mt-1 text-sm text-[#4A5370]">
+                    {CONTACT.phoneDisplay}
+                  </p>
+                  <p className="mt-0.5 text-xs font-medium text-[#0D6832]">
+                    Replies within minutes
+                  </p>
                 </div>
               </a>
             </Reveal>
 
+            {/* WhatsApp — Adarsh */}
             <Reveal delay={0.05}>
               <a
                 href={CONTACT.adarshWhatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card flex items-start gap-4 p-6 transition-all hover:bg-white/80 hover:border-blue/30"
+                className="card flex items-start gap-4 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#25D366] hover:shadow-sm"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] bg-[#25D366]/10 text-[#0D6832]">
                   <MessageCircle className="h-5 w-5" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-semibold text-ink">WhatsApp</p>
-                    <span className="rounded-pill bg-violet/10 px-2 py-0.5 text-[10px] font-medium text-violet">Adarsh</span>
+                    <p className="text-sm font-semibold text-[#1F2A44]">
+                      WhatsApp
+                    </p>
+                    <span className="rounded-[6px] bg-[#0B3D2E]/10 px-2 py-0.5 text-[10px] font-semibold text-[#0B3D2E]">
+                      Adarsh
+                    </span>
                   </div>
-                  <p className="mt-1 text-sm text-ink-dim">{CONTACT.adarshPhoneDisplay}</p>
-                  <p className="mt-0.5 text-xs text-ink-faint">Direct line to co-founder</p>
+                  <p className="mt-1 text-sm text-[#4A5370]">
+                    {CONTACT.adarshPhoneDisplay}
+                  </p>
+                  <p className="mt-0.5 text-xs text-[#4A5370]">
+                    Direct line to co-founder
+                  </p>
                 </div>
               </a>
             </Reveal>
 
+            {/* Phone */}
             <Reveal delay={0.1}>
               <a
                 href={CONTACT.phoneHref}
-                className="glass-card flex items-start gap-4 p-6 transition-all hover:bg-white/80 hover:border-blue/30"
+                className="card flex items-start gap-4 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#B84B23] hover:shadow-sm"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue/10 text-blue">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] bg-[#B84B23]/10 text-[#8B3512]">
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink">Direct Call</p>
-                  <p className="mt-1 text-sm text-ink-dim">{CONTACT.phoneDisplay}</p>
-                  <p className="mt-0.5 text-xs text-ink-faint">Direct line to studio</p>
+                  <p className="text-sm font-semibold text-[#1F2A44]">
+                    Direct Call
+                  </p>
+                  <p className="mt-1 text-sm text-[#4A5370]">
+                    {CONTACT.phoneDisplay}
+                  </p>
                 </div>
               </a>
             </Reveal>
 
+            {/* Email */}
             <Reveal delay={0.12}>
               <a
                 href={CONTACT.emailHref}
-                className="glass-card flex items-start gap-4 p-6 transition-all hover:bg-white/80 hover:border-blue/30"
+                className="card flex items-start gap-4 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#B84B23] hover:shadow-sm"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet/10 text-violet">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] bg-[#0B3D2E]/10 text-[#0B3D2E]">
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink">Email Support</p>
-                  <p className="mt-1 text-sm text-ink-dim">{CONTACT.email}</p>
-                  <p className="mt-0.5 text-xs text-ink-faint">For RFPs &amp; detailed briefs</p>
+                  <p className="text-sm font-semibold text-[#1F2A44]">Email</p>
+                  <p className="mt-1 text-sm text-[#4A5370]">
+                    {CONTACT.email}
+                  </p>
                 </div>
               </a>
             </Reveal>
 
-            <Reveal delay={0.18}>
-              <div className="glass-card flex items-start gap-4 p-6">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan/10 text-cyan">
+            {/* Location and hours */}
+            <Reveal delay={0.16}>
+              <div className="card flex items-start gap-4 p-5">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] bg-[#B84B23]/10 text-[#8B3512]">
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink">Studio Presence</p>
-                  <p className="mt-1 text-sm text-ink-dim">{CONTACT.locationDisplay}</p>
-                  <p className="mt-0.5 text-xs text-ink-faint">{CONTACT.supportHours}</p>
+                  <p className="text-sm font-semibold text-[#1F2A44]">
+                    Location
+                  </p>
+                  <p className="mt-1 text-sm text-[#4A5370]">
+                    {CONTACT.locationDisplay}
+                  </p>
+                  <div className="mt-2 flex items-center gap-1.5 text-xs text-[#4A5370]">
+                    <Clock className="h-3 w-3" />
+                    {CONTACT.supportHours}
+                  </div>
                 </div>
               </div>
             </Reveal>
@@ -117,59 +167,57 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Payment & Security Assurance Banner */}
-      <section className="pb-12">
-        <div className="container-shell">
-          <div className="grid grid-cols-1 gap-4 rounded-2xl border border-border bg-white/40 p-6 backdrop-blur-sm sm:grid-cols-3">
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="h-5 w-5 text-blue shrink-0" />
-              <div>
-                <p className="text-xs font-semibold text-ink">GST Invoices Provided</p>
-                <p className="text-[11px] text-ink-faint">Full tax input credit for Indian businesses</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <CreditCard className="h-5 w-5 text-violet shrink-0" />
-              <div>
-                <p className="text-xs font-semibold text-ink">Flexible Milestone Payments</p>
-                <p className="text-[11px] text-ink-faint">Pay via UPI, NEFT, IMPS or Credit/Debit Cards</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Clock className="h-5 w-5 text-cyan shrink-0" />
-              <div>
-                <p className="text-xs font-semibold text-ink">Rapid 1–2 Week Delivery</p>
-                <p className="text-[11px] text-ink-faint">Guaranteed on-time launch with weekly demos</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-pad bg-base-soft">
-        <div className="container-shell max-w-2xl text-center">
-          <SectionHeading eyebrow="Prefer a Quick Chat?" title="Skip the form — connect on WhatsApp." align="center" className="mx-auto" />
+      {/* Quick WhatsApp section */}
+      <section
+        className="section-spacing"
+        style={{ backgroundColor: "#F3ECE0" }}
+      >
+        <div className="container-main max-w-2xl text-center">
+          <SectionHeading
+            eyebrow="Prefer a Quick Chat?"
+            title="Skip the form — connect on WhatsApp."
+            align="center"
+            className="mx-auto"
+          />
           <Reveal delay={0.1}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <Button href={CONTACT.whatsappHref} variant="primary">Chat on WhatsApp</Button>
-              <Button href={CONTACT.phoneHref} variant="outline" showArrow={false}>Call {CONTACT.phoneDisplay}</Button>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Button href={CONTACT.whatsappHref} variant="whatsapp">
+                <MessageCircle className="h-4 w-4" />
+                Chat on WhatsApp
+              </Button>
+              <Button href={CONTACT.phoneHref} variant="outline">
+                Call {CONTACT.phoneDisplay}
+              </Button>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad bg-base-soft">
-        <div className="container-shell max-w-3xl">
-          <SectionHeading eyebrow="FAQ" title="Frequently asked questions before starting." align="center" className="mx-auto" />
+      {/* FAQs */}
+      <section
+        className="section-spacing"
+        style={{ backgroundColor: "#FBF6EE" }}
+      >
+        <div className="container-main max-w-3xl">
+          <SectionHeading
+            eyebrow="FAQ"
+            title="Common questions before starting."
+            align="center"
+            className="mx-auto"
+          />
           <div className="mt-10 space-y-3">
             {FAQS.map((faq, i) => (
-              <Reveal key={faq.id} delay={i * 0.05}>
-                <details className="glass-card group p-5 open:pb-5">
-                  <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-medium text-ink">
+              <Reveal key={faq.id} delay={i * 0.04}>
+                <details className="card group p-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-medium text-[#1F2A44]">
                     {faq.question}
-                    <span className="ml-4 text-ink-faint transition-transform group-open:rotate-45">+</span>
+                    <span className="ml-4 text-[#4A5370] transition-transform group-open:rotate-45">
+                      +
+                    </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-dim">{faq.answer}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-[#4A5370]">
+                    {faq.answer}
+                  </p>
                 </details>
               </Reveal>
             ))}

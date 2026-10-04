@@ -1,59 +1,101 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Star, Loader2, MessageSquarePlus, CheckCircle2, BadgeCheck } from "lucide-react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import Link from "next/link";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import {
+  Star,
+  Loader2,
+  MessageSquarePlus,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { supabase, isSupabaseConfigured } from "@/lib/supabaseClient";
-import type { Review } from "@/types";
+import { supabase } from "@/lib/supabaseClient";
+import { SEED_REVIEWS } from "@/data/content";
+import type { Review } from "@/data/content";
 
 const TABLE = "reviews";
-
-const SEED_REVIEWS: Review[] = [
-  {
-    id: "seed-1",
-    name: "Sheshnath Gupta",
-    business: "Founder, Mohit Enterprise Group (Thawe)",
-    rating: 5,
-    message:
-      "AKA AI Studio built our official group website mohitmobile.in. Ayush, Kumari Abhilasha, and Adarsh delivered a top-class, fast portal on time. Our customers can now easily explore our smartphone showrooms and reach us directly on WhatsApp.",
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 14).toISOString(),
-  },
-  {
-    id: "seed-2",
-    name: "Administration & Management",
-    business: "Nav Bharat Public School (Thawe, Gopalganj)",
-    rating: 5,
-    message:
-      "The new portal navbharatpublicschool.info has modernized our school's digital presence. Parents find the online admissions inquiry, academic curriculum, and photo galleries very helpful and fast on their phones.",
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString(),
-  },
-  {
-    id: "seed-3",
-    name: "Hotel Management",
-    business: "Hotel Sarkar & Marriage Hall (Thawe)",
-    rating: 5,
-    message:
-      "Our website hotel-sarkar.vercel.app showcases our banquet hall, rooms, and marriage lawn beautifully. The instant WhatsApp booking CTA brings us direct wedding and room reservation inquiries regularly.",
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 45).toISOString(),
-  },
-  {
-    id: "seed-4",
-    name: "Sandeep Kumar",
-    business: "Proprietor, Sandeep Traders (Bihar)",
-    rating: 5,
-    message:
-      "The digital catalog for our cement, steel, and building materials is fast, clean, and easy for contractors to browse on 4G networks. Direct quotation inquiries have increased noticeably.",
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 60).toISOString(),
-  },
-];
 
 export function ReviewsSection() {
   const [reviews, setReviews] = useState<Review[]>(SEED_REVIEWS);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const prefersReduced = useReducedMotion();
 
+  // Embla Autoplay plugin configuration: 5s delay, pause on hover/focus/drag
+  const autoplayRef = useRef(
+    Autoplay({
+      delay: 5000,
+      stopOnMouseEnter: true,
+      stopOnInteraction: false,
+      stopOnFocusIn: true,
+    })
+  );
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start", duration: 30 },
+    prefersReduced ? [] : [autoplayRef.current]
+  );
+
+  // Resume autoplay 2 seconds after pointer/touch interaction ends
+  useEffect(() => {
+    if (!emblaApi || prefersReduced) return;
+
+    let resumeTimeout: NodeJS.Timeout;
+
+    const onPointerUp = () => {
+      clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => {
+        autoplayRef.current?.play();
+      }, 2000);
+    };
+
+    emblaApi.on("pointerUp", onPointerUp);
+
+    return () => {
+      clearTimeout(resumeTimeout);
+      emblaApi.off("pointerUp", onPointerUp);
+    };
+  }, [emblaApi, prefersReduced]);
+
+  // Track active slide index and snap list
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  // Keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (!emblaApi) return;
+      if (e.key === "ArrowLeft") {
+        emblaApi.scrollPrev();
+      } else if (e.key === "ArrowRight") {
+        emblaApi.scrollNext();
+      }
+    },
+    [emblaApi]
+  );
+
+  // Load reviews from Supabase if configured
   useEffect(() => {
     let active = true;
     async function load() {
@@ -67,9 +109,11 @@ export function ReviewsSection() {
 
       if (!active) return;
       if (!fetchError && data && data.length > 0) {
-        // Merge Supabase reviews with seed reviews without duplicate IDs
         const existingIds = new Set(data.map((r: Review) => r.id));
-        const combined = [...data, ...SEED_REVIEWS.filter((s) => !existingIds.has(s.id))];
+        const combined = [
+          ...data,
+          ...SEED_REVIEWS.filter((s) => !existingIds.has(s.id)),
+        ];
         setReviews(combined);
       }
       setLoading(false);
@@ -83,77 +127,161 @@ export function ReviewsSection() {
   function handleNewReview(review: Review) {
     setReviews((prev) => [review, ...prev]);
     setShowForm(false);
+    emblaApi?.scrollTo(0);
   }
 
   return (
-    <section className="section-pad bg-base-soft">
-      <div className="container-shell">
-        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end">
+    <section
+      id="reviews"
+      className="section-spacing overflow-x-clip"
+      style={{ backgroundColor: "#F3ECE0" }}
+    >
+      <div className="container-main">
+        {/* Header & Write Review toggle */}
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeading
-            eyebrow="Client Trust &amp; Reviews"
-            title="What Indian business owners say about us."
-            description="Real feedback from schools, retail groups, hotels, and suppliers we've built digital products for — 100% verified client reviews."
+            eyebrow="What Our Clients Say"
+            title="Real feedback from real businesses."
           />
           <Reveal delay={0.1}>
-            <button
-              onClick={() => setShowForm((s) => !s)}
-              className="glass-strong inline-flex shrink-0 items-center gap-2 rounded-pill px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-white/70 shadow-sm"
-            >
-              <MessageSquarePlus className="h-4 w-4 text-blue" />
-              {showForm ? "Cancel" : "Write a Review"}
-            </button>
+            <div className="flex items-center gap-3">
+              {/* Carousel navigation buttons */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => emblaApi?.scrollPrev()}
+                  aria-label="Previous review"
+                  className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-[#E2DDD5] bg-white text-[#1F2A44] transition-all hover:bg-[#FBF6EE] active:scale-95"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={() => emblaApi?.scrollNext()}
+                  aria-label="Next review"
+                  className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-[#E2DDD5] bg-white text-[#1F2A44] transition-all hover:bg-[#FBF6EE] active:scale-95"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
+
+              <button
+                onClick={() => setShowForm((s) => !s)}
+                className="btn btn-outline shrink-0 text-sm"
+              >
+                <MessageSquarePlus className="h-4 w-4" />
+                {showForm ? "Cancel" : "Write a Review"}
+              </button>
+            </div>
           </Reveal>
         </div>
 
+        {/* Review form */}
         {showForm && (
           <div className="mt-10">
             <ReviewForm onSuccess={handleNewReview} />
           </div>
         )}
 
+        {/* Loading state */}
         {loading && (
-          <div className="mt-14 flex items-center justify-center gap-2 text-sm text-ink-faint">
-            <Loader2 className="h-4 w-4 animate-spin" /> Loading recent reviews...
+          <div className="mt-14 flex items-center justify-center gap-2 text-sm text-[#4A5370]">
+            <Loader2 className="h-4 w-4 animate-spin" /> Loading reviews...
           </div>
         )}
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {reviews.map((r, i) => (
-            <Reveal key={r.id} delay={Math.min(i * 0.06, 0.3)}>
-              <div className="glass-card flex h-full flex-col justify-between p-6 transition-all duration-300 hover:border-blue/30">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex gap-1 text-violet">
-                      {Array.from({ length: 5 }).map((_, idx) => (
-                        <Star
-                          key={idx}
-                          className={`h-4 w-4 ${idx < r.rating ? "fill-current" : "fill-none text-border-strong"}`}
-                        />
-                      ))}
+        {/* Embla Carousel Viewport */}
+        <div
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
+          role="region"
+          aria-label="Client reviews carousel"
+          aria-live="off"
+          className="mt-12 outline-none focus-visible:ring-2 focus-visible:ring-[#B84B23]/30"
+        >
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex -ml-4 touch-pan-y">
+              {reviews.map((r, i) => (
+                <div
+                  key={r.id || `review-${i}`}
+                  className="min-w-0 pl-4 flex-[0_0_88%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
+                >
+                  <div className="card flex h-full flex-col justify-between p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#B84B23]/50 hover:shadow-md">
+                    <div>
+                      {/* Stars */}
+                      <div className="flex gap-1 text-[#F2B705]">
+                        {Array.from({ length: 5 }).map((_, idx) => (
+                          <Star
+                            key={idx}
+                            className={`h-4 w-4 ${
+                              idx < r.rating
+                                ? "fill-current"
+                                : "fill-none text-[#E2DDD5]"
+                            }`}
+                          />
+                        ))}
+                      </div>
+
+                      <p className="mt-3.5 text-sm leading-relaxed text-[#1F2A44]">
+                        &ldquo;{r.message}&rdquo;
+                      </p>
                     </div>
-                    <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600">
-                      <BadgeCheck className="h-3.5 w-3.5" /> Verified
-                    </span>
+
+                    {/* Author badge */}
+                    <div className="mt-6 flex items-center gap-3 border-t border-[#E2DDD5]/70 pt-4">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#B84B23] text-xs font-bold text-white shadow-xs">
+                        {r.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-semibold text-[#1F2A44]">
+                          {r.name}
+                        </p>
+                        {r.business && (
+                          <p className="truncate text-xs text-[#4A5370]">
+                            {r.business}
+                          </p>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <p className="mt-4 text-sm leading-relaxed text-ink">&ldquo;{r.message}&rdquo;</p>
                 </div>
-                <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue to-violet text-xs font-semibold text-white">
-                    {r.name.charAt(0).toUpperCase()}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-ink truncate">{r.name}</p>
-                    {r.business && <p className="text-xs text-ink-faint truncate">{r.business}</p>}
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Indicator dots with active 5-second progress fill */}
+          <div className="mt-8 flex items-center justify-center gap-2">
+            {scrollSnaps.map((_, idx) => {
+              const isActive = idx === selectedIndex;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => emblaApi?.scrollTo(idx)}
+                  aria-label={`Go to review ${idx + 1}`}
+                  className="relative h-2 overflow-hidden rounded-full transition-all duration-300 bg-[#CFC8BD] hover:bg-[#8B91A5]"
+                  style={{ width: isActive ? "32px" : "8px" }}
+                >
+                  {isActive && !prefersReduced && (
+                    <span
+                      key={`progress-${selectedIndex}`}
+                      className="absolute inset-0 bg-[#B84B23] rounded-full"
+                      style={{
+                        animation: "progressFill 5s linear forwards",
+                      }}
+                    />
+                  )}
+                  {isActive && prefersReduced && (
+                    <span className="absolute inset-0 bg-[#B84B23] rounded-full" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
+/* ─── Review submission form ─── */
 
 function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
   const [name, setName] = useState("");
@@ -176,7 +304,6 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
     }
 
     if (!supabase) {
-      // Local fallback submission if Supabase is not configured yet
       const localReview: Review = {
         id: `local-${Date.now()}`,
         name: name.trim(),
@@ -205,7 +332,6 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
     setSubmitting(false);
 
     if (error || !data) {
-      // Graceful fallback
       const localReview: Review = {
         id: `local-${Date.now()}`,
         name: name.trim(),
@@ -225,16 +351,24 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
 
   if (done) {
     return (
-      <div className="glass-card flex flex-col items-center gap-3 p-10 text-center">
-        <CheckCircle2 className="h-9 w-9 text-blue" />
-        <p className="text-display text-lg font-medium text-ink">Thanks for the review!</p>
-        <p className="text-sm text-ink-dim">Your review is displayed live on this page.</p>
+      <div className="card flex flex-col items-center gap-3 p-10 text-center">
+        <CheckCircle2 className="h-9 w-9 text-[#0B3D2E]" />
+        <p className="text-heading text-lg font-semibold text-[#1F2A44]">
+          Thanks for your review!
+        </p>
+        <p className="text-sm text-[#4A5370]">
+          Your review is now displayed on this page.
+        </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass-card mx-auto max-w-2xl space-y-5 p-8">
+    <form
+      onSubmit={handleSubmit}
+      className="card mx-auto max-w-2xl space-y-5 p-7"
+    >
+      {/* Honeypot */}
       <input
         type="text"
         value={website}
@@ -247,28 +381,34 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <label className="mb-2 block text-sm font-medium text-ink">Your name</label>
+          <label className="mb-2 block text-sm font-medium text-[#1F2A44]">
+            Your name
+          </label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Sheshnath Gupta"
+            placeholder="Your full name"
             required
-            className="w-full rounded-2xl border border-border-strong bg-white/60 px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:border-blue focus:outline-none"
+            className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
           />
         </div>
         <div>
-          <label className="mb-2 block text-sm font-medium text-ink">Business Name &amp; Location (optional)</label>
+          <label className="mb-2 block text-sm font-medium text-[#1F2A44]">
+            Business name and location (optional)
+          </label>
           <input
             value={business}
             onChange={(e) => setBusiness(e.target.value)}
-            placeholder="Mohit Enterprise Group (Thawe)"
-            className="w-full rounded-2xl border border-border-strong bg-white/60 px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:border-blue focus:outline-none"
+            placeholder="e.g. Mohit Enterprise Group, Thawe"
+            className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
           />
         </div>
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-ink">Rating</label>
+        <label className="mb-2 block text-sm font-medium text-[#1F2A44]">
+          Rating
+        </label>
         <div className="flex gap-1.5">
           {Array.from({ length: 5 }).map((_, idx) => {
             const value = idx + 1;
@@ -278,11 +418,13 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
                 type="button"
                 onClick={() => setRating(value)}
                 aria-label={`${value} star${value > 1 ? "s" : ""}`}
-                className="p-1"
+                className="p-1 transition-transform hover:scale-110 active:scale-95"
               >
                 <Star
                   className={`h-7 w-7 transition-colors ${
-                    value <= rating ? "fill-violet text-violet" : "fill-none text-border-strong"
+                    value <= rating
+                      ? "fill-[#F2B705] text-[#F2B705]"
+                      : "fill-none text-[#E2DDD5]"
                   }`}
                 />
               </button>
@@ -292,26 +434,39 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-ink">Your feedback</label>
+        <label className="mb-2 block text-sm font-medium text-[#1F2A44]">
+          Your feedback
+        </label>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
           rows={4}
           placeholder="Tell us about your experience working with AKA AI Studio..."
-          className="w-full rounded-2xl border border-border-strong bg-white/60 px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:border-blue focus:outline-none"
+          className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
         />
       </div>
 
-      {formError && <p className="text-sm text-red-500">{formError}</p>}
+      {formError && <p className="text-sm text-red-600">{formError}</p>}
 
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-pill bg-gradient-to-r from-blue via-violet to-cyan px-6 py-3.5 text-sm font-medium text-white shadow-[0_10px_30px_-8px_rgba(67,97,238,0.5)] transition-transform hover:scale-[1.01] disabled:opacity-70"
+        className="btn btn-primary w-full disabled:opacity-70"
       >
         {submitting ? "Submitting..." : "Submit Review"}
       </button>
+
+      <p className="text-center text-xs text-[#6B7280]">
+        By submitting, you agree to our{" "}
+        <Link
+          href="/privacy"
+          className="text-[#B84B23] underline underline-offset-2 hover:text-[#A8431F]"
+        >
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </form>
   );
 }

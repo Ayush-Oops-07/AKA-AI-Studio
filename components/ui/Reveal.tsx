@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { TRANSITION_EASE } from "@/lib/motion";
 
 interface RevealProps {
   children: React.ReactNode;
@@ -11,15 +12,27 @@ interface RevealProps {
 }
 
 /**
- * Standard scroll-reveal wrapper: fade + rise, once per element.
+ * Scroll-reveal wrapper: fades and slides up 16-24px once when entering viewport.
+ * Respects prefers-reduced-motion for zero motion sickness.
  */
-export function Reveal({ children, delay = 0, className, y = 24 }: RevealProps) {
+export function Reveal({
+  children,
+  delay = 0,
+  className,
+  y = 20,
+}: RevealProps) {
+  const prefersReduced = useReducedMotion();
+
+  if (prefersReduced) {
+    return <div className={cn(className)}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, ease: TRANSITION_EASE, delay }}
       className={cn(className)}
     >
       {children}

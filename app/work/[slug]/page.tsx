@@ -1,81 +1,110 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, MapPin, ExternalLink, Sparkles, CheckCircle2 } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  MapPin,
+  ExternalLink,
+  CheckCircle2,
+  Clock,
+  Calendar,
+  Layers,
+  MessageCircle,
+} from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
-import { CTASection } from "@/components/shared/CTASection";
 import { Button } from "@/components/ui/Button";
-import { CASE_STUDIES, CONTACT } from "@/constants/data";
+import { PROJECTS, CONTACT } from "@/data/content";
 
 export function generateStaticParams() {
-  return CASE_STUDIES.map((cs) => ({ slug: cs.id }));
+  return PROJECTS.map((p) => ({ slug: p.id }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
-  const cs = CASE_STUDIES.find((c) => c.id === slug);
-  if (!cs) return {};
+  const project = PROJECTS.find((p) => p.id === slug);
+  if (!project) return {};
   return {
-    title: `${cs.client} — AKA AI Studio Case Study`,
-    description: cs.summary,
+    title: `${project.client} — Case Study | AKA AI Studio`,
+    description: `${project.client} (${project.type}, ${project.location}): ${project.solution}`,
   };
 }
 
-export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const cs = CASE_STUDIES.find((c) => c.id === slug);
-  if (!cs) notFound();
+  const project = PROJECTS.find((p) => p.id === slug);
+  if (!project) notFound();
 
-  const index = CASE_STUDIES.findIndex((c) => c.id === cs.id);
-  const next = CASE_STUDIES[(index + 1) % CASE_STUDIES.length] ?? cs;
+  const index = PROJECTS.findIndex((p) => p.id === project.id);
+  const nextProject = PROJECTS[(index + 1) % PROJECTS.length] ?? project;
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pb-12 pt-36 lg:pt-44">
-        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[480px] bg-gradient-to-b from-blue/10 via-violet/5 to-transparent" />
-        <div className="container-shell max-w-3xl">
+      {/* Header section */}
+      <section
+        className="pb-10 pt-32 lg:pt-40"
+        style={{ backgroundColor: "#FBF6EE" }}
+      >
+        <div className="container-main max-w-4xl">
           <Reveal>
-            <Link href="/work" className="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-ink">
-              <ArrowLeft className="h-4 w-4" /> Back to All Projects
+            <Link
+              href="/work"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#4A5370] transition-colors hover:text-[#1F2A44]"
+            >
+              <ArrowLeft className="h-4 w-4" /> Back to All Work
             </Link>
           </Reveal>
 
           <Reveal delay={0.06}>
-            <div className="mt-6 flex flex-wrap items-center gap-2">
-              <span className="text-mono-eyebrow gradient-text">{cs.industry}</span>
-              {cs.location && (
-                <span className="inline-flex items-center gap-1 text-xs text-ink-faint">
-                  <MapPin className="h-3 w-3 text-blue" /> {cs.location}
-                </span>
-              )}
-              {cs.liveUrl && (
-                <span className="glass-strong inline-flex items-center gap-1.5 rounded-pill px-3 py-0.5 text-xs font-medium text-ink">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                  Live in Production
-                </span>
-              )}
+            <div className="mt-5 flex flex-wrap items-center gap-2.5">
+              <span className="rounded-[6px] bg-[#B84B23]/10 px-2.5 py-1 text-xs font-semibold text-[#B84B23]">
+                {project.type}
+              </span>
+              <span className="inline-flex items-center gap-1 text-xs text-[#4A5370]">
+                <MapPin className="h-3.5 w-3.5 text-[#B84B23]" />
+                {project.location}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366]/15 px-2.5 py-0.5 text-xs font-medium text-[#0B3D2E]">
+                <span className="h-2 w-2 rounded-full bg-[#25D366]" />
+                Live Website
+              </span>
             </div>
           </Reveal>
 
           <Reveal delay={0.12}>
-            <h1 className="text-display mt-4 text-4xl font-medium leading-[1.08] text-ink sm:text-5xl">
-              {cs.title}
+            <h1 className="text-heading mt-4 text-3xl leading-[1.15] text-[#1F2A44] sm:text-4xl lg:text-5xl">
+              {project.client}
             </h1>
           </Reveal>
+
           <Reveal delay={0.18}>
-            <p className="mt-3 text-lg font-medium text-ink-faint">{cs.client}</p>
+            <p className="mt-4 text-base leading-relaxed text-[#4A5370] lg:text-lg">
+              {project.solution}
+            </p>
           </Reveal>
 
-          <Reveal delay={0.24}>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              {cs.liveUrl && (
-                <Button href={cs.liveUrl} variant="primary">
-                  Visit Live Site
-                </Button>
-              )}
-              <Button href={CONTACT.whatsappHref} variant="ghost" showArrow={false}>
+          <Reveal delay={0.22}>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Visit Live Site
+                <ExternalLink className="h-4 w-4" />
+              </a>
+              <Button href={CONTACT.whatsappHref} variant="whatsapp">
+                <MessageCircle className="h-4 w-4" />
                 Discuss a Similar Project
               </Button>
             </div>
@@ -83,160 +112,233 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Screenshot Showcase Section */}
-      <section className="pb-8">
-        <div className="container-shell max-w-5xl">
+      {/* Screenshot section */}
+      <section className="pb-8" style={{ backgroundColor: "#FBF6EE" }}>
+        <div className="container-main max-w-5xl">
           <Reveal>
-            <div className="glass-card relative aspect-[16/9] w-full overflow-hidden !p-0 shadow-xl border border-white/40">
-              {cs.image ? (
+            <div className="card overflow-hidden !p-0 shadow-sm">
+              <div className="relative aspect-video w-full overflow-hidden bg-[#E2DDD5]">
                 <Image
-                  src={cs.image}
-                  alt={`${cs.client} website screenshot`}
+                  src={project.image}
+                  alt={project.imageAlt}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 1200px"
-                  className="object-cover object-top"
                   priority
+                  sizes="(max-width: 1024px) 100vw, 1024px"
+                  className="object-cover object-top"
                 />
-              ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-blue/10 via-violet/10 to-cyan/10">
-                  <span className="rounded-pill glass px-5 py-2 text-sm font-medium tracking-wide text-ink-dim">
-                    Live Project
-                  </span>
-                  <span className="text-display text-2xl font-medium text-ink/50">{cs.client}</span>
-                </div>
-              )}
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Case Study Details */}
-      <section className="section-pad pt-8">
-        <div className="container-shell max-w-5xl grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-8">
-          <div className="lg:col-span-2 space-y-8">
-            <Reveal>
-              <h2 className="text-display text-2xl font-medium text-ink">Project Overview</h2>
-              <p className="mt-4 text-base leading-relaxed text-ink-dim">{cs.about}</p>
-            </Reveal>
-
-            <Reveal delay={0.08}>
-              <div>
-                <h3 className="text-display text-lg font-medium text-ink">Key Highlights &amp; Scope</h3>
-                <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  <div className="flex items-start gap-2.5 text-sm text-ink-dim">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-blue" />
-                    Mobile-first responsive architecture
-                  </div>
-                  <div className="flex items-start gap-2.5 text-sm text-ink-dim">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-blue" />
-                    Sub-second load times on 4G/5G networks
-                  </div>
-                  <div className="flex items-start gap-2.5 text-sm text-ink-dim">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-blue" />
-                    Custom domain, DNS &amp; SSL configuration
-                  </div>
-                  <div className="flex items-start gap-2.5 text-sm text-ink-dim">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-blue" />
-                    Direct WhatsApp lead generation integration
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.12}>
-              <div>
-                <h3 className="text-display text-lg font-medium text-ink">Technologies &amp; Tags</h3>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {cs.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-pill bg-gradient-to-r from-blue/10 via-violet/10 to-cyan/10 px-3.5 py-1.5 text-xs font-medium text-ink-dim"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-
-            {cs.liveUrl && (
-              <Reveal delay={0.16}>
-                <div className="rounded-2xl border border-border bg-white/50 p-6 backdrop-blur-sm">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-ink-faint">Live Website</p>
-                  <a
-                    href={cs.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group mt-2 inline-flex items-center gap-2 text-base font-semibold text-blue hover:text-violet transition-colors"
-                  >
-                    <span>{cs.liveUrl.replace(/^https?:\/\//, "")}</span>
-                    <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
+      {/* Main details + Sidebar */}
+      <section className="section-spacing pt-4" style={{ backgroundColor: "#FBF6EE" }}>
+        <div className="container-main max-w-5xl">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-12">
+            {/* Left 2 cols: Problem, What We Built, Result, Highlights, Tech */}
+            <div className="space-y-10 lg:col-span-2">
+              <Reveal>
+                <div className="card p-7 sm:p-8">
+                  <span className="text-eyebrow">The Challenge</span>
+                  <h2 className="text-heading mt-2 text-2xl text-[#1F2A44]">
+                    The Problem
+                  </h2>
+                  <p className="mt-3 text-base leading-relaxed text-[#4A5370]">
+                    {project.problem}
+                  </p>
                 </div>
               </Reveal>
-            )}
-          </div>
 
-          {/* Project Details Sidebar */}
-          <Reveal delay={0.1}>
-            <div className="glass-card h-fit p-6 space-y-6">
-              <h3 className="text-display text-sm font-medium uppercase tracking-wide text-ink-faint">
-                Project Summary
-              </h3>
-              <dl className="space-y-4">
-                <div className="flex items-center justify-between border-b border-border pb-3">
-                  <dt className="text-sm text-ink-dim">Client</dt>
-                  <dd className="text-sm font-medium text-ink text-right">{cs.client}</dd>
-                </div>
-                <div className="flex items-center justify-between border-b border-border pb-3">
-                  <dt className="text-sm text-ink-dim">Location</dt>
-                  <dd className="text-sm font-medium text-ink text-right">{cs.location || "Bihar, India"}</dd>
-                </div>
-                <div className="flex items-center justify-between border-b border-border pb-3">
-                  <dt className="text-sm text-ink-dim">Industry</dt>
-                  <dd className="text-sm font-medium text-ink text-right">{cs.industry}</dd>
-                </div>
-                {cs.metrics.map((m) => (
-                  <div key={m.label} className="flex items-center justify-between border-b border-border pb-3 last:border-0 last:pb-0">
-                    <dt className="text-sm text-ink-dim">{m.label}</dt>
-                    <dd className="text-sm font-medium text-ink text-right">{m.value}</dd>
+              <Reveal delay={0.06}>
+                <div className="card p-7 sm:p-8">
+                  <span className="text-eyebrow">Our Solution</span>
+                  <h2 className="text-heading mt-2 text-2xl text-[#1F2A44]">
+                    What We Built
+                  </h2>
+                  <p className="mt-3 text-base leading-relaxed text-[#4A5370]">
+                    {project.solution}
+                  </p>
+
+                  <h3 className="text-heading mt-6 text-lg text-[#1F2A44]">
+                    Key Deliverables
+                  </h3>
+                  <div className="mt-4 space-y-2.5">
+                    {project.highlights.map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-start gap-2.5 text-sm leading-relaxed text-[#4A5370]"
+                      >
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#B84B23]" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </dl>
+                </div>
+              </Reveal>
 
-              {cs.liveUrl && (
-                <Button href={cs.liveUrl} variant="primary" className="w-full justify-center">
-                  Visit Live Site
-                </Button>
-              )}
+              <Reveal delay={0.1}>
+                <div className="card p-7 sm:p-8">
+                  <span className="text-eyebrow">Outcome</span>
+                  <h2 className="text-heading mt-2 text-2xl text-[#1F2A44]">
+                    The Result
+                  </h2>
+                  <p className="mt-3 text-base leading-relaxed text-[#4A5370]">
+                    {project.result}
+                  </p>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.12}>
+                <div className="card p-7 sm:p-8">
+                  <div className="flex items-center gap-2">
+                    <Layers className="h-5 w-5 text-[#B84B23]" />
+                    <h3 className="text-heading text-lg text-[#1F2A44]">
+                      Technologies Used
+                    </h3>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-[6px] bg-[#F3ECE0] px-3 py-1.5 text-xs font-medium text-[#1F2A44]"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+
+            {/* Right sidebar: Project Summary card */}
+            <div className="lg:col-span-1">
+              <Reveal delay={0.14}>
+                <div className="card sticky top-24 p-6">
+                  <h3 className="text-heading text-lg text-[#1F2A44]">
+                    Project Summary
+                  </h3>
+
+                  <dl className="mt-5 space-y-4 text-sm">
+                    <div className="flex items-start justify-between border-b border-[#E2DDD5] pb-3">
+                      <dt className="text-[#4A5370]">Client</dt>
+                      <dd className="font-medium text-[#1F2A44] text-right">
+                        {project.client}
+                      </dd>
+                    </div>
+
+                    <div className="flex items-start justify-between border-b border-[#E2DDD5] pb-3">
+                      <dt className="text-[#4A5370]">Location</dt>
+                      <dd className="font-medium text-[#1F2A44] text-right">
+                        {project.location}
+                      </dd>
+                    </div>
+
+                    <div className="flex items-start justify-between border-b border-[#E2DDD5] pb-3">
+                      <dt className="text-[#4A5370]">Type</dt>
+                      <dd className="font-medium text-[#1F2A44] text-right">
+                        {project.type}
+                      </dd>
+                    </div>
+
+                    <div className="flex items-start justify-between border-b border-[#E2DDD5] pb-3">
+                      <dt className="text-[#4A5370]">Delivery Time</dt>
+                      <dd className="flex items-center gap-1 font-medium text-[#1F2A44]">
+                        <Clock className="h-3.5 w-3.5 text-[#B84B23]" />
+                        {project.deliveryTime}
+                      </dd>
+                    </div>
+
+                    <div className="flex items-start justify-between border-b border-[#E2DDD5] pb-3">
+                      <dt className="text-[#4A5370]">Custom Domain</dt>
+                      <dd className="font-medium text-[#1F2A44]">
+                        {project.hasCustomDomain ? "Yes (.info / .in)" : "Hosted Portal"}
+                      </dd>
+                    </div>
+                  </dl>
+
+                  <div className="mt-6 space-y-3">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary w-full"
+                    >
+                      Visit Live Site
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                    <a
+                      href={CONTACT.whatsappHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-whatsapp w-full"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      Chat on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Next Project Carousel Navigation */}
-      <section className="pb-8">
-        <div className="container-shell max-w-5xl">
+      {/* Next case study nav */}
+      <section className="pb-16" style={{ backgroundColor: "#FBF6EE" }}>
+        <div className="container-main max-w-5xl">
           <Reveal>
             <Link
-              href={`/work/${next.id}`}
-              className="glass-card group flex items-center justify-between gap-4 p-6 transition-all hover:border-blue/30"
+              href={`/work/${nextProject.id}`}
+              className="card group flex items-center justify-between p-6 transition-all hover:border-[#B84B23]"
             >
               <div>
-                <p className="text-xs text-ink-faint">Next Case Study</p>
-                <p className="text-display mt-1 text-lg font-medium text-ink">{next.client}</p>
-                <p className="text-xs text-ink-dim mt-0.5">{next.title}</p>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#4A5370]">
+                  Next Project
+                </span>
+                <h4 className="text-heading mt-1 text-xl text-[#1F2A44] group-hover:text-[#B84B23] transition-colors">
+                  {nextProject.client}
+                </h4>
+                <p className="mt-0.5 text-xs text-[#4A5370]">
+                  {nextProject.type} · {nextProject.location}
+                </p>
               </div>
-              <ArrowUpRight className="h-5 w-5 text-ink-dim transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="h-5 w-5 text-[#4A5370] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[#B84B23]" />
             </Link>
           </Reveal>
         </div>
       </section>
 
-      <CTASection
-        title="Ready to build a website for your business?"
-        description="Connect directly with Ayush, K. Abhilasha & Adarsh on WhatsApp — we'll share a customized quote and prototype plan within 24 hours."
-      />
+      {/* Bottom CTA on Deep Green */}
+      <section className="section-spacing section-dark">
+        <div className="container-main max-w-2xl text-center">
+          <Reveal>
+            <span className="text-eyebrow">Work With Us</span>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <h2 className="text-heading mt-3 text-3xl text-white sm:text-4xl">
+              Want a similar website for your business?
+            </h2>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="mt-4 text-base text-white/70">
+              Talk directly with Adarsh, Ayush, and Kumari Abhilasha on WhatsApp.
+              We will share timeline, scope, and fair pricing within a few hours.
+            </p>
+          </Reveal>
+          <Reveal delay={0.18}>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Button href={CONTACT.whatsappHref} variant="whatsapp">
+                <MessageCircle className="h-4 w-4" />
+                Chat on WhatsApp
+              </Button>
+              <Button href={CONTACT.phoneHref} variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:text-white">
+                Call {CONTACT.phoneDisplay}
+              </Button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }

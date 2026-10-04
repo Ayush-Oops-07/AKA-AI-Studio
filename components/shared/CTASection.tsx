@@ -1,32 +1,45 @@
+import { MessageCircle, Phone } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { CONTACT } from "@/constants/data";
+import { CONTACT } from "@/data/content";
 
 export function CTASection({
-  title = "Ready to build something intelligent?",
-  description = "Message us on WhatsApp or give us a call — we'll reply within one business day with next steps.",
+  title = "Ready to get your business online?",
+  description = "Message us on WhatsApp or give us a call — we will reply within a few hours.",
 }: {
   title?: string;
   description?: string;
 }) {
   return (
-    <section className="section-pad">
-      <div className="container-shell">
+    <section className="section-spacing section-dark">
+      <div className="container-main max-w-2xl text-center">
         <Reveal>
-          <div className="glass-card relative overflow-hidden px-8 py-16 text-center sm:px-16">
-            <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-blue/20 blur-[100px]" />
-            <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-violet/20 blur-[100px]" />
-            <h2 className="text-display mx-auto max-w-2xl text-3xl font-medium leading-tight text-ink sm:text-4xl md:text-5xl">
-              {title}
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-ink-dim md:text-lg">
-              {description}
-            </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <Button href={CONTACT.whatsappHref} variant="primary">WhatsApp Us</Button>
-              <Button href={CONTACT.phoneHref} variant="outline" showArrow={false}>Call Now</Button>
-              <Button href="/work" variant="ghost" showArrow={false}>See Our Work</Button>
-            </div>
+          <span className="text-eyebrow">Work With Us</span>
+        </Reveal>
+        <Reveal delay={0.06}>
+          <h2 className="text-heading mt-3 text-3xl text-white sm:text-4xl">
+            {title}
+          </h2>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <p className="mt-4 text-base leading-relaxed text-white/70">
+            {description}
+          </p>
+        </Reveal>
+        <Reveal delay={0.18}>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Button href={CONTACT.whatsappHref} variant="whatsapp">
+              <MessageCircle className="h-4 w-4" />
+              Chat on WhatsApp
+            </Button>
+            <Button
+              href={CONTACT.phoneHref}
+              variant="outline"
+              className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+            >
+              <Phone className="h-4 w-4" />
+              Call {CONTACT.phoneDisplay}
+            </Button>
           </div>
         </Reveal>
       </div>
