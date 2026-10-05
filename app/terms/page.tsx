@@ -5,6 +5,9 @@ import { PAGE_META, CONTACT } from "@/data/content";
 export const metadata: Metadata = {
   title: PAGE_META.terms.title,
   description: PAGE_META.terms.description,
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 export default function TermsOfServicePage() {

@@ -3,10 +3,20 @@ import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/shared/CTASection";
 
+import { PAGE_META } from "@/data/content";
+
 export const metadata: Metadata = {
-  title: "Technologies We Use — AKA AI Studio",
-  description:
-    "The tools and frameworks AKA AI Studio uses to build fast websites, mobile apps, and WhatsApp automations.",
+  title: PAGE_META.technologies.title,
+  description: PAGE_META.technologies.description,
+  alternates: {
+    canonical: "/technologies",
+  },
+  openGraph: {
+    title: PAGE_META.technologies.title,
+    description: PAGE_META.technologies.description,
+    url: "https://www.akaaistudio.in/technologies",
+    type: "website",
+  },
 };
 
 const TECH_GROUPS = [

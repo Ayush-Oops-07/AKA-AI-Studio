@@ -49,7 +49,7 @@ export function FinalCTA() {
       {/* Background rhythm layer fading in on view (500ms) */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[#F6EDE0]"
+        className="pointer-events-none absolute inset-0 z-0 bg-[#F6EDE0]"
         initial={prefersReduced ? { opacity: 1 } : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -133,7 +133,7 @@ export function FinalCTA() {
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Full name"
                       required
-                      className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-2.5 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                      className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-2.5 text-base sm:text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                     />
                   </div>
                   <div>
@@ -145,7 +145,7 @@ export function FinalCTA() {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+91 98765 43210"
                       type="tel"
-                      className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-2.5 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                      className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-2.5 text-base sm:text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                     />
                   </div>
                 </div>
@@ -157,7 +157,7 @@ export function FinalCTA() {
                   <select
                     value={businessType}
                     onChange={(e) => setBusinessType(e.target.value)}
-                    className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-2.5 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                    className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-2.5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                   >
                     <option value="">Select your business type</option>
                     <option value="School or College">School or College</option>
@@ -180,7 +180,7 @@ export function FinalCTA() {
                     required
                     rows={3}
                     placeholder="Tell us briefly what you need..."
-                    className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-2.5 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                    className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-2.5 text-base sm:text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                   />
                 </div>
 

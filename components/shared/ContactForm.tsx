@@ -71,11 +71,11 @@ export function ContactForm() {
             }}
             required
             placeholder=" "
-            className="peer w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 pb-2.5 pt-5 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+            className="peer w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 pb-2.5 pt-5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
           />
           <label
             htmlFor="contact-name"
-            className="pointer-events-none absolute left-4 top-2 text-[11px] font-semibold text-[#4A5370] transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#B84B23]"
+            className="pointer-events-none absolute left-4 top-2 text-[11px] font-semibold text-[#4A5370] transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base sm:peer-placeholder-shown:text-sm peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#B84B23]"
           >
             Your full name
           </label>
@@ -93,11 +93,11 @@ export function ContactForm() {
             }}
             required
             placeholder=" "
-            className="peer w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 pb-2.5 pt-5 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+            className="peer w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 pb-2.5 pt-5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
           />
           <label
             htmlFor="contact-phone"
-            className="pointer-events-none absolute left-4 top-2 text-[11px] font-semibold text-[#4A5370] transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#B84B23]"
+            className="pointer-events-none absolute left-4 top-2 text-[11px] font-semibold text-[#4A5370] transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base sm:peer-placeholder-shown:text-sm peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#B84B23]"
           >
             Phone number
           </label>
@@ -110,7 +110,7 @@ export function ContactForm() {
           id="contact-business"
           value={businessType}
           onChange={(e) => setBusinessType(e.target.value)}
-          className="peer w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 pb-2.5 pt-5 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+          className="peer w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 pb-2.5 pt-5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
         >
           <option value="">Select your business type (optional)</option>
           <option value="School or College">School or College</option>
@@ -141,11 +141,11 @@ export function ContactForm() {
           }}
           required
           placeholder=" "
-          className="peer w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 pb-2.5 pt-6 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+          className="peer w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 pb-2.5 pt-6 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
         />
         <label
           htmlFor="contact-message"
-          className="pointer-events-none absolute left-4 top-2 text-[11px] font-semibold text-[#4A5370] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#B84B23]"
+          className="pointer-events-none absolute left-4 top-2 text-[11px] font-semibold text-[#4A5370] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base sm:peer-placeholder-shown:text-sm peer-placeholder-shown:font-normal peer-focus:top-2 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#B84B23]"
         >
           What are you looking to build?
         </label>

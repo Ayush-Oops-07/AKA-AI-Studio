@@ -10,6 +10,15 @@ import { PAGE_META, PROJECTS, CONTACT } from "@/data/content";
 export const metadata: Metadata = {
   title: PAGE_META.work.title,
   description: PAGE_META.work.description,
+  alternates: {
+    canonical: "/work",
+  },
+  openGraph: {
+    title: PAGE_META.work.title,
+    description: PAGE_META.work.description,
+    url: "https://www.akaaistudio.in/work",
+    type: "website",
+  },
 };
 
 export default function WorkPage() {

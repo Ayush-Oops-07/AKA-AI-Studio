@@ -16,10 +16,29 @@ import { FAQSection } from "@/components/home/FAQSection";
 import { FreeWebsiteCheck } from "@/components/home/FreeWebsiteCheck";
 import { QuickQuoteForm } from "@/components/home/QuickQuoteForm";
 import { LocationContact } from "@/components/home/LocationContact";
+import { FAQS } from "@/data/content";
+
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
 
 export default function HomePage() {
   return (
     <>
+      {/* FAQPage JSON-LD Schema for rich snippet search results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
+      />
       {/* 1. Hero */}
       <Hero />
 

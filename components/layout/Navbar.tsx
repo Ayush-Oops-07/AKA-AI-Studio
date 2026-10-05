@@ -100,7 +100,7 @@ export function Navbar() {
       {/* 1. Scroll progress bar: 3px terracotta (#B84B23) fixed at very top */}
       <motion.div
         className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-[#B84B23]"
-        style={{ scaleX: prefersReduced ? 1 : scaleX }}
+        style={{ scaleX: prefersReduced ? 1 : scaleX, originX: 0 }}
         aria-hidden="true"
       />
 
@@ -182,11 +182,11 @@ export function Navbar() {
             <span>Chat on WhatsApp</span>
           </motion.a>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Menu Toggle Button: 44x44px touch target */}
           <button
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((open) => !open)}
-            className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-[#E2DDD5] bg-white text-[#1F2A44] transition-colors hover:bg-[#F3ECE0] lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-[#E2DDD5] bg-white text-[#1F2A44] transition-colors hover:bg-[#F3ECE0] active:scale-95 lg:hidden"
           >
             {mobileOpen ? (
               <X className="h-5 w-5" />
@@ -236,14 +236,14 @@ export function Navbar() {
                   </div>
                   <button
                     onClick={() => setMobileOpen(false)}
-                    aria-label="Close menu"
-                    className="p-1 text-[#1F2A44] hover:text-[#B84B23]"
+                    aria-label="Close drawer"
+                    className="flex h-11 w-11 items-center justify-center rounded-[8px] text-[#1F2A44] transition-colors hover:bg-[#F3ECE0] hover:text-[#B84B23] active:scale-95"
                   >
                     <X className="h-5 w-5" />
                   </button>
                 </div>
 
-                {/* Staggered links (50ms stagger) */}
+                {/* Staggered links (50ms stagger) with >=44px tap target */}
                 <nav className="mt-6 flex flex-col gap-2">
                   {NAV_LINKS.map((link, idx) => (
                     <motion.div
@@ -260,7 +260,7 @@ export function Navbar() {
                         href={link.href}
                         onClick={(e) => handleLinkClick(e, link.href)}
                         className={cn(
-                          "block rounded-[8px] px-3.5 py-2.5 text-base font-medium transition-colors",
+                          "flex min-h-[44px] items-center rounded-[8px] px-4 py-2.5 text-base font-medium transition-colors",
                           pathname === link.href
                             ? "bg-white font-semibold text-[#B84B23] shadow-xs"
                             : "text-[#1F2A44] hover:bg-white/60"
@@ -280,7 +280,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileOpen(false)}
-                  className="flex w-full items-center justify-center gap-2 rounded-[8px] bg-[#25D366] px-4 py-3 text-sm font-semibold text-[#0B3D2E] shadow-sm transition-colors hover:bg-[#1DA851] hover:text-white"
+                  className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-[8px] bg-[#25D366] px-4 py-3 text-sm font-semibold text-[#0B3D2E] shadow-sm transition-colors hover:bg-[#1DA851] hover:text-white"
                 >
                   <MessageCircle className="h-4 w-4" />
                   <span>Chat on WhatsApp</span>

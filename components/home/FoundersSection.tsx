@@ -19,7 +19,7 @@ export function FoundersSection() {
       {/* Background rhythm layer fading in on view (500ms) */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[#F6EDE0]"
+        className="pointer-events-none absolute inset-0 z-0 bg-[#F6EDE0]"
         initial={prefersReduced ? { opacity: 1 } : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -45,7 +45,7 @@ export function FoundersSection() {
           <div className="mx-auto mt-10 max-w-xl overflow-hidden rounded-[12px] border border-[#E2DDD5] bg-[#FBF6EE] p-2 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[9px] bg-[#F3ECE0]">
               <Image
-                src="/images/team/group-photo.png"
+                src="/images/team/group-photo.avif"
                 alt="Adarsh, Ayush and Kumari Abhilasha, the three founders of AKA AI Studio"
                 fill
                 sizes="(max-width: 768px) 90vw, 580px"

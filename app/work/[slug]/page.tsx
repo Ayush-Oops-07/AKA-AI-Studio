@@ -29,9 +29,33 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = PROJECTS.find((p) => p.id === slug);
   if (!project) return {};
+  const canonicalUrl = `/work/${project.id}`;
   return {
     title: `${project.client} — Case Study | AKA AI Studio`,
     description: `${project.client} (${project.type}, ${project.location}): ${project.solution}`,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: `${project.client} — Case Study | AKA AI Studio`,
+      description: `${project.client} (${project.type}, ${project.location}): ${project.solution}`,
+      url: `https://www.akaaistudio.in${canonicalUrl}`,
+      type: "article",
+      images: [
+        {
+          url: project.image,
+          width: 1200,
+          height: 630,
+          alt: `${project.client} website preview`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.client} — Case Study | AKA AI Studio`,
+      description: `${project.client} (${project.type}, ${project.location}): ${project.solution}`,
+      images: [project.image],
+    },
   };
 }
 
@@ -296,9 +320,9 @@ export default async function CaseStudyPage({
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#4A5370]">
                   Next Project
                 </span>
-                <h4 className="text-heading mt-1 text-xl text-[#1F2A44] group-hover:text-[#B84B23] transition-colors">
+                <h2 className="text-heading mt-1 text-xl text-[#1F2A44] group-hover:text-[#B84B23] transition-colors">
                   {nextProject.client}
-                </h4>
+                </h2>
                 <p className="mt-0.5 text-xs text-[#4A5370]">
                   {nextProject.type} · {nextProject.location}
                 </p>

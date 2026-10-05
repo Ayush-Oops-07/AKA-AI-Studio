@@ -81,7 +81,7 @@ export const HERO = {
   trustLine: "No middlemen. Honest pricing. Replies within one business day.",
   ctaPrimary: "Chat on WhatsApp",
   ctaSecondary: "See our work",
-  founderPhoto: "/images/team/group-photo.png",
+  founderPhoto: "/images/team/group-photo.avif",
   founderPhotoAlt:
     "Adarsh, Ayush and Kumari Abhilasha, the three founders of AKA AI Studio",
   floatingBadge1: "3 founders. Direct support.",
@@ -298,7 +298,7 @@ export const PROJECTS: Project[] = [
     ],
     tech: ["Next.js", "Tailwind CSS"],
     deliveryTime: "1 week",
-    image: "/images/work/Navratri Vibes with Dandiya Beats 2026.jpg",
+    image: "/images/work/navratri-vibes-2026.jpg",
     imageAlt: "Screenshot of the Navratri Vibes event website showing event details",
     liveUrl: "https://www.elitesgroup.org/",
     hasCustomDomain: true,
@@ -563,6 +563,13 @@ export const FOOTER = {
       { label: "Mobile App", href: "/services#mobile-app" },
       { label: "AI Chatbot", href: "/services#ai-chatbot" },
     ],
+    explore: [
+      { label: "Industries We Serve", href: "/industries" },
+      { label: "Technologies", href: "/technologies" },
+      { label: "Studio Blog", href: "/blog" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+    ],
   },
 };
 
@@ -628,6 +635,21 @@ export const PAGE_META = {
     title: "Terms of Service — AKA AI Studio",
     description:
       "Terms of service, scope of work, payment terms, and delivery agreements for client projects with AKA AI Studio.",
+  },
+  industries: {
+    title: "Industries We Serve — AKA AI Studio",
+    description:
+      "Websites, WhatsApp booking setup, and custom web tools for schools, hotels, banquet halls, and retail businesses across Bihar and UP.",
+  },
+  technologies: {
+    title: "Technologies We Use — Next.js, React, Tailwind CSS | AKA AI Studio",
+    description:
+      "Modern, fast frameworks and tools AKA AI Studio uses to build sub-second websites, mobile applications, and WhatsApp automations.",
+  },
+  blog: {
+    title: "Notes from the Studio — Web Development & SEO Insights | AKA AI Studio",
+    description:
+      "Practical tips and insights on building websites, WhatsApp lead generation, 4G performance, and local business SEO in India.",
   },
 };
 

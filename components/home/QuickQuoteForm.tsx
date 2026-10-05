@@ -106,11 +106,11 @@ export function QuickQuoteForm() {
                       if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
                     }}
                     placeholder=" "
-                    className="peer block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3.5 pb-2 pt-5 text-sm text-[#1F2A44] transition-all duration-200 placeholder-transparent focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                    className="peer block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3.5 pb-2 pt-5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 placeholder-transparent focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                   />
                   <label
                     htmlFor="quote-name"
-                    className="pointer-events-none absolute left-3.5 top-1.5 origin-[0] -translate-y-0 scale-75 text-xs text-[#4A5370] transition-all duration-200 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-xs peer-focus:text-[#B84B23]"
+                    className="pointer-events-none absolute left-3.5 top-1.5 origin-[0] -translate-y-0 scale-75 text-xs text-[#4A5370] transition-all duration-200 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-base sm:peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-xs peer-focus:text-[#B84B23]"
                   >
                     Your name *
                   </label>
@@ -130,11 +130,11 @@ export function QuickQuoteForm() {
                       if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
                     }}
                     placeholder=" "
-                    className="peer block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3.5 pb-2 pt-5 text-sm text-[#1F2A44] transition-all duration-200 placeholder-transparent focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                    className="peer block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3.5 pb-2 pt-5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 placeholder-transparent focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                   />
                   <label
                     htmlFor="quote-phone"
-                    className="pointer-events-none absolute left-3.5 top-1.5 origin-[0] -translate-y-0 scale-75 text-xs text-[#4A5370] transition-all duration-200 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-xs peer-focus:text-[#B84B23]"
+                    className="pointer-events-none absolute left-3.5 top-1.5 origin-[0] -translate-y-0 scale-75 text-xs text-[#4A5370] transition-all duration-200 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-base sm:peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-xs peer-focus:text-[#B84B23]"
                   >
                     Phone number *
                   </label>
@@ -156,7 +156,7 @@ export function QuickQuoteForm() {
                       id="quote-business"
                       value={businessType}
                       onChange={(e) => setBusinessType(e.target.value)}
-                      className="mt-1.5 block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3 py-2.5 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                      className="mt-1.5 block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3 py-2.5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                     >
                       {QUICK_QUOTE.businessTypes.map((type) => (
                         <option key={type} value={type}>
@@ -177,7 +177,7 @@ export function QuickQuoteForm() {
                       id="quote-need"
                       value={projectNeed}
                       onChange={(e) => setProjectNeed(e.target.value)}
-                      className="mt-1.5 block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3 py-2.5 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                      className="mt-1.5 block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3 py-2.5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                     >
                       {QUICK_QUOTE.projectNeeds.map((need) => (
                         <option key={need} value={need}>
@@ -198,7 +198,7 @@ export function QuickQuoteForm() {
                       id="quote-budget"
                       value={budgetRange}
                       onChange={(e) => setBudgetRange(e.target.value)}
-                      className="mt-1.5 block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3 py-2.5 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                      className="mt-1.5 block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3 py-2.5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                     >
                       {QUICK_QUOTE.budgetRanges.map((range) => (
                         <option key={range} value={range}>
@@ -219,7 +219,7 @@ export function QuickQuoteForm() {
                       id="quote-timeline"
                       value={timeline}
                       onChange={(e) => setTimeline(e.target.value)}
-                      className="mt-1.5 block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3 py-2.5 text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                      className="mt-1.5 block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3 py-2.5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                     >
                       {QUICK_QUOTE.timelines.map((time) => (
                         <option key={time} value={time}>
@@ -238,7 +238,7 @@ export function QuickQuoteForm() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder=" "
-                    className="peer block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3.5 pb-2 pt-5 text-sm text-[#1F2A44] transition-all duration-200 placeholder-transparent focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+                    className="peer block w-full rounded-[8px] border border-[#E2DDD5] bg-white px-3.5 pb-2 pt-5 text-base sm:text-sm text-[#1F2A44] transition-all duration-200 placeholder-transparent focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
                   />
                   <label
                     htmlFor="quote-message"

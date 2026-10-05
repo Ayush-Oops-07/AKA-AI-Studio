@@ -13,7 +13,7 @@ export function Footer() {
       style={{ backgroundColor: "#0B3D2E", color: "#fff" }}
     >
       <div className="container-main py-14">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand column */}
           <Reveal delay={0.06}>
             <div className="lg:col-span-2 space-y-4">
@@ -72,7 +72,7 @@ export function Footer() {
           {/* Company links */}
           <Reveal delay={0.12}>
             <div>
-              <h4 className="text-sm font-semibold tracking-wide text-white">Company</h4>
+              <p className="text-sm font-semibold tracking-wide text-white">Company</p>
               <ul className="mt-4 space-y-2.5">
                 {FOOTER.links.company.map((link) => (
                   <li key={link.label}>
@@ -93,7 +93,7 @@ export function Footer() {
           {/* Services links */}
           <Reveal delay={0.18}>
             <div>
-              <h4 className="text-sm font-semibold tracking-wide text-white">Services</h4>
+              <p className="text-sm font-semibold tracking-wide text-white">Services</p>
               <ul className="mt-4 space-y-2.5">
                 {FOOTER.links.services.map((link) => (
                   <li key={link.label}>
@@ -103,6 +103,26 @@ export function Footer() {
                     >
                       <span>{link.label}</span>
                       {/* Center-grow underline matching header */}
+                      <span className="absolute inset-x-0 bottom-0 h-[1.5px] scale-x-0 origin-center bg-[#F2B705] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          {/* Explore links */}
+          <Reveal delay={0.24}>
+            <div>
+              <p className="text-sm font-semibold tracking-wide text-white">Explore</p>
+              <ul className="mt-4 space-y-2.5">
+                {((FOOTER.links as any).explore ?? []).map((link: any) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="group relative inline-flex items-center py-0.5 text-sm text-white/70 transition-colors duration-200 hover:text-white"
+                    >
+                      <span>{link.label}</span>
                       <span className="absolute inset-x-0 bottom-0 h-[1.5px] scale-x-0 origin-center bg-[#F2B705] transition-transform duration-300 ease-out group-hover:scale-x-100" />
                     </Link>
                   </li>

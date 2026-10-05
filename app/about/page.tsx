@@ -9,6 +9,15 @@ import { MessageCircle } from "lucide-react";
 export const metadata: Metadata = {
   title: PAGE_META.about.title,
   description: PAGE_META.about.description,
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: PAGE_META.about.title,
+    description: PAGE_META.about.description,
+    url: "https://www.akaaistudio.in/about",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {
@@ -50,7 +59,7 @@ export default function AboutPage() {
             <div className="mx-auto mb-12 max-w-xl overflow-hidden rounded-[12px] border border-[#E2DDD5] bg-[#FBF6EE] p-2 shadow-sm transition-all duration-300 hover:shadow-md">
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[9px] bg-[#F3ECE0]">
                 <Image
-                  src="/images/team/group-photo.png"
+                  src="/images/team/group-photo.avif"
                   alt="Adarsh, Ayush and Kumari Abhilasha, the three founders of AKA AI Studio"
                   fill
                   sizes="(max-width: 768px) 90vw, 580px"

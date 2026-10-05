@@ -15,10 +15,7 @@ export default function ErrorBoundary({ error, reset }: ErrorProps) {
   }, [error]);
 
   return (
-    <section
-      className="flex min-h-[75vh] flex-col items-center justify-center px-4 pt-32 text-center"
-      style={{ backgroundColor: "#FBF6EE" }}
-    >
+    <section className="flex min-h-[75vh] flex-col items-center justify-center bg-[#FBF6EE] px-4 pt-32 text-center">
       <div className="container-main max-w-md">
         <span className="text-eyebrow">Something went wrong</span>
         <h1 className="text-heading mt-4 text-3xl font-medium text-[#1F2A44] sm:text-5xl">
@@ -31,11 +28,11 @@ export default function ErrorBoundary({ error, reset }: ErrorProps) {
           <button
             type="button"
             onClick={() => reset()}
-            className="btn btn-primary inline-flex items-center gap-2"
+            className="btn btn-primary"
           >
             <RefreshCw className="h-4 w-4" /> Try Again
           </button>
-          <Button href="/" variant="outline" className="inline-flex items-center gap-2">
+          <Button href="/" variant="outline">
             <Home className="h-4 w-4" /> Back to Home
           </Button>
         </div>

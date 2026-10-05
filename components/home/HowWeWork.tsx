@@ -43,7 +43,7 @@ export function HowWeWork() {
 
           {/* Scroll-driven progressive connecting line */}
           <motion.div
-            style={{ scaleX: prefersReduced ? 1 : scaleX }}
+            style={{ scaleX: prefersReduced ? 1 : scaleX, originX: 0 }}
             className="absolute left-[18%] right-[18%] top-7 z-0 hidden h-[2px] origin-left bg-[#F2B705] sm:block shadow-[0_0_8px_rgba(242,183,5,0.6)]"
             aria-hidden="true"
           />

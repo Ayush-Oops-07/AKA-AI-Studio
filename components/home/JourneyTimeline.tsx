@@ -69,26 +69,23 @@ export function JourneyTimeline() {
                       damping: 18, // small overshoot
                       delay: 0.1,
                     }}
-                    className="absolute left-[13px] top-1.5 h-4 w-4 rounded-full border-[3px] border-[#FBF6EE] bg-[#B84B23] shadow-xs sm:left-auto"
-                    style={
-                      isLeft
-                        ? { right: "-9px", left: "auto" }
-                        : { left: "-9px" }
-                    }
+                    className={`absolute top-1.5 h-4 w-4 rounded-full border-[3px] border-[#FBF6EE] bg-[#B84B23] shadow-xs left-[13px] sm:left-auto ${
+                      isLeft ? "sm:-right-[9px]" : "sm:-left-[9px]"
+                    }`}
                     aria-hidden="true"
                   />
 
-                  {/* Milestone text: fades in from side (desktop) or bottom (mobile) */}
+                  {/* Milestone text: fades in smoothly with clean vertical rise */}
                   <motion.div
                     initial={
                       prefersReduced
                         ? { opacity: 1 }
                         : {
                             opacity: 0,
-                            x: isLeft ? -20 : 20,
+                            y: 14,
                           }
                     }
-                    whileInView={{ opacity: 1, x: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-40px" }}
                     transition={{
                       duration: 0.5,

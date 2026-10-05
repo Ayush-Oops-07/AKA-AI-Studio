@@ -37,7 +37,7 @@ export function SelectedWork() {
       {/* Background rhythm layer fading in on view (500ms) */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[#F6EDE0]"
+        className="pointer-events-none absolute inset-0 z-0 bg-[#F6EDE0]"
         initial={prefersReduced ? { opacity: 1 } : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -64,7 +64,7 @@ export function SelectedWork() {
                 type="button"
                 onClick={() => setActiveFilter(cat)}
                 aria-pressed={isActive}
-                className={`relative rounded-full px-4 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-[#B84B23] ${
+                className={`relative flex min-h-[38px] sm:min-h-[32px] items-center justify-center rounded-full px-4 py-2 sm:py-1.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-[#B84B23] ${
                   isActive ? "text-white" : "text-[#4A5370] hover:text-[#1F2A44]"
                 }`}
               >

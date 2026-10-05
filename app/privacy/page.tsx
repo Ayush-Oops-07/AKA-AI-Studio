@@ -5,6 +5,9 @@ import { PAGE_META, CONTACT } from "@/data/content";
 export const metadata: Metadata = {
   title: PAGE_META.privacy.title,
   description: PAGE_META.privacy.description,
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

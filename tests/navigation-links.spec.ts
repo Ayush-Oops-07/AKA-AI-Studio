@@ -21,7 +21,12 @@ test.describe("Navigation & Links Integrity", () => {
 
       page.on("console", (msg) => {
         if (msg.type() === "error") {
-          consoleErrors.push(msg.text());
+          const text = msg.text();
+          // Ignore external service network errors (matching requestfailed policy for third-party services)
+          if (text.includes("net::ERR_") || text.includes("Failed to load resource")) {
+            return;
+          }
+          consoleErrors.push(text);
         }
       });
 

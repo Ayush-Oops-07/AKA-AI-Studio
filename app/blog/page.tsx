@@ -3,10 +3,20 @@ import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/shared/CTASection";
 
+import { PAGE_META } from "@/data/content";
+
 export const metadata: Metadata = {
-  title: "Notes from the Studio — AKA AI Studio",
-  description:
-    "Honest thoughts on building websites, WhatsApp automation, and software for local businesses in Bihar and UP.",
+  title: PAGE_META.blog.title,
+  description: PAGE_META.blog.description,
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: PAGE_META.blog.title,
+    description: PAGE_META.blog.description,
+    url: "https://www.akaaistudio.in/blog",
+    type: "website",
+  },
 };
 
 const POSTS = [

@@ -101,22 +101,29 @@ export function ReviewsSection() {
     async function load() {
       if (!supabase) return;
       setLoading(true);
-      const { data, error: fetchError } = await supabase
-        .from(TABLE)
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(12);
+      try {
+        const { data, error: fetchError } = await supabase
+          .from(TABLE)
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(12);
 
-      if (!active) return;
-      if (!fetchError && data && data.length > 0) {
-        const existingIds = new Set(data.map((r: Review) => r.id));
-        const combined = [
-          ...data,
-          ...SEED_REVIEWS.filter((s) => !existingIds.has(s.id)),
-        ];
-        setReviews(combined);
+        if (!active) return;
+        if (!fetchError && data && data.length > 0) {
+          const existingIds = new Set(data.map((r: Review) => r.id));
+          const combined = [
+            ...data,
+            ...SEED_REVIEWS.filter((s) => !existingIds.has(s.id)),
+          ];
+          setReviews(combined);
+        }
+      } catch {
+        // Fallback to seed reviews silently if remote database is unreachable
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
       }
-      setLoading(false);
     }
     load();
     return () => {
@@ -150,14 +157,14 @@ export function ReviewsSection() {
                 <button
                   onClick={() => emblaApi?.scrollPrev()}
                   aria-label="Previous review"
-                  className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-[#E2DDD5] bg-white text-[#1F2A44] transition-all hover:bg-[#FBF6EE] active:scale-95"
+                  className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-[#E2DDD5] bg-white text-[#1F2A44] transition-all hover:bg-[#FBF6EE] active:scale-95"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
                 <button
                   onClick={() => emblaApi?.scrollNext()}
                   aria-label="Next review"
-                  className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-[#E2DDD5] bg-white text-[#1F2A44] transition-all hover:bg-[#FBF6EE] active:scale-95"
+                  className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-[#E2DDD5] bg-white text-[#1F2A44] transition-all hover:bg-[#FBF6EE] active:scale-95"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -389,7 +396,7 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
             onChange={(e) => setName(e.target.value)}
             placeholder="Your full name"
             required
-            className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+            className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-base sm:text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
           />
         </div>
         <div>
@@ -400,7 +407,7 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
             value={business}
             onChange={(e) => setBusiness(e.target.value)}
             placeholder="e.g. Mohit Enterprise Group, Thawe"
-            className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+            className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-base sm:text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
           />
         </div>
       </div>
@@ -409,7 +416,7 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
         <label className="mb-2 block text-sm font-medium text-[#1F2A44]">
           Rating
         </label>
-        <div className="flex gap-1.5">
+        <div className="flex flex-wrap gap-1">
           {Array.from({ length: 5 }).map((_, idx) => {
             const value = idx + 1;
             return (
@@ -418,7 +425,7 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
                 type="button"
                 onClick={() => setRating(value)}
                 aria-label={`${value} star${value > 1 ? "s" : ""}`}
-                className="p-1 transition-transform hover:scale-110 active:scale-95"
+                className="flex h-11 w-11 items-center justify-center rounded-lg p-1 transition-transform hover:scale-110 active:scale-95"
               >
                 <Star
                   className={`h-7 w-7 transition-colors ${
@@ -443,7 +450,7 @@ function ReviewForm({ onSuccess }: { onSuccess: (review: Review) => void }) {
           required
           rows={4}
           placeholder="Tell us about your experience working with AKA AI Studio..."
-          className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
+          className="w-full rounded-[8px] border border-[#E2DDD5] bg-white px-4 py-3 text-base sm:text-sm text-[#1F2A44] placeholder:text-[#4A5370] transition-all focus:border-[#B84B23] focus:outline-none focus:ring-2 focus:ring-[#B84B23]/20"
         />
       </div>
 

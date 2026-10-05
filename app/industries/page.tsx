@@ -11,10 +11,20 @@ import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/shared/CTASection";
 
+import { PAGE_META } from "@/data/content";
+
 export const metadata: Metadata = {
-  title: "Industries We Serve — AKA AI Studio",
-  description:
-    "Websites and WhatsApp tools for schools, hotels, shops, and suppliers across Bihar and UP.",
+  title: PAGE_META.industries.title,
+  description: PAGE_META.industries.description,
+  alternates: {
+    canonical: "/industries",
+  },
+  openGraph: {
+    title: PAGE_META.industries.title,
+    description: PAGE_META.industries.description,
+    url: "https://www.akaaistudio.in/industries",
+    type: "website",
+  },
 };
 
 const INDUSTRIES = [

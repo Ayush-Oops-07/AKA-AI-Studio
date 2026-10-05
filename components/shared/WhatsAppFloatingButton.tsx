@@ -8,14 +8,7 @@ export function WhatsAppFloatingButton() {
 
   return (
     <div
-      style={{
-        position: "fixed",
-        right: "16px",
-        bottom: "16px",
-        zIndex: 50,
-        width: "56px",
-        height: "56px",
-      }}
+      className="fixed bottom-[calc(68px+env(safe-area-inset-bottom,0px))] right-4 z-40 h-14 w-14 sm:bottom-6 sm:right-6"
       aria-label="WhatsApp quick contact container"
     >
       {/* Pulse ring using transform: scale and opacity only */}

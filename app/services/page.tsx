@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Globe, MessageCircle, Smartphone, Bot } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -21,6 +22,15 @@ const ICON_MAP: Record<string, LucideIcon> = {
 export const metadata: Metadata = {
   title: PAGE_META.services.title,
   description: PAGE_META.services.description,
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    title: PAGE_META.services.title,
+    description: PAGE_META.services.description,
+    url: "https://www.akaaistudio.in/services",
+    type: "website",
+  },
 };
 
 export default function ServicesPage() {
@@ -84,6 +94,18 @@ export default function ServicesPage() {
             <p className="mt-10 text-center text-sm text-[#4A5370]">
               {SERVICES_ALSO_AVAILABLE}
             </p>
+          </Reveal>
+
+          <Reveal delay={0.28}>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-[#B84B23]">
+              <Link href="/industries" className="underline underline-offset-4 hover:text-[#983C17]">
+                Explore Industries We Serve →
+              </Link>
+              <span className="text-[#CFC8BD]">·</span>
+              <Link href="/work" className="underline underline-offset-4 hover:text-[#983C17]">
+                See Real Live Client Work →
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>

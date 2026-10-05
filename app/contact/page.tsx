@@ -9,6 +9,15 @@ import { PAGE_META, FAQS, CONTACT } from "@/data/content";
 export const metadata: Metadata = {
   title: PAGE_META.contact.title,
   description: PAGE_META.contact.description,
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: PAGE_META.contact.title,
+    description: PAGE_META.contact.description,
+    url: "https://www.akaaistudio.in/contact",
+    type: "website",
+  },
 };
 
 export default function ContactPage() {
